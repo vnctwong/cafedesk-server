@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = () => {
-
-  // returns all categories for user
   router.get('/', (req, res) => {
     res.send('boop');
   });
@@ -17,7 +15,6 @@ module.exports = () => {
     res.send(`User ${req.params.user_id}'s view history`);
   });
 
-  // create new category
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
     res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
   });
