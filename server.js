@@ -5,7 +5,7 @@ const app = express();
 
 // require routes
 const usersRoutes = require('./routes/users');
-const tagsRoutes = require('./routes/users');
+const tagsRoutes = require('./routes/tags');
 const businessesRoutes = require('./routes/businesses');
 const searchRoutes = require('./routes/search');
 const recommendationsRoutes = require('./routes/recommendations');
