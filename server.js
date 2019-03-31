@@ -8,3 +8,7 @@ const usersRoutes = require('./routes/users');
 
 // mount routes
 app.use('/users', usersRoutes());
+
+app.listen(PORT, () => {
+  console.log('Example app listening on port ' + PORT);
+});
