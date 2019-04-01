@@ -1,21 +1,15 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Open_hours', {
+    return queryInterface.createTable('User_view_stores', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      day: {
-        type: Sequelize.INTEGER
-      },
-      open_time: {
-        type: Sequelize.STRING
-      },
-      close_time: {
-        type: Sequelize.STRING
+      viewed: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +22,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Open_hours');
+    return queryInterface.dropTable('User_view_stores');
   }
 };

@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Business.associate = function (models) {
     // associations can be defined here
+    Business.hasMany(models.Open_hours);
+    Business.hasMany(models.Tag);
+    Business.hasMany(models.User_fav_store);
+    Business.hasMany(models.User_view_store);
   };
 
   return Business;

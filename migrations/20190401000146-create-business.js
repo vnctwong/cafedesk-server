@@ -19,6 +19,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      yelp_id: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
