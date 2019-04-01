@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/xwang1000/cafedesk-server#readme",
   "devDependencies": {
-    "jest": "^24.5.0",
-    "jest-mock-axios": "^2.3.0"
+    "jest": "^24.5.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
