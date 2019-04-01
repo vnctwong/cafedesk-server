@@ -7,12 +7,11 @@ module.exports = () => {
   router.get('/:keyword', (req, res) => {
     yelp.search(req.params.keyword)
       .then(response => {
-        res.send(response.data);
+        res.status(200).send(response.data);
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error);
       });
-    // res.send(`Search for: ${req.params.keyword}`);
   });
 
   return router;
