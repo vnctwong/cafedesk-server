@@ -10,6 +10,15 @@ function search(querry, longitude = -123.1207, latitude = 49.2827) {
   });
 }
 
+function getBusiness(querry) {
+  return axios.get(`https://api.yelp.com/v3/businesses/${querry}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.YELP_KEY}`
+    },
+  });
+}
+
 module.exports = {
-  search
+  search,
+  getBusiness
 };
