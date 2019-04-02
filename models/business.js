@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     img_url: DataTypes.STRING(1234),
     address: DataTypes.STRING,
     yelp_id: DataTypes.STRING,
+    longitude: DataTypes.FLOAT,
+    latitude: DataTypes.FLOAT,
   }, {});
 
   Business.associate = function (models) {
