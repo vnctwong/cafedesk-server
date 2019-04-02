@@ -16,8 +16,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.STRING
+      img_url: {
+        type: Sequelize.STRING(1234)
       },
       yelp_id: {
         type: Sequelize.STRING
