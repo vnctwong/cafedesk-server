@@ -8,7 +8,7 @@ module.exports = () => {
   router.get('/:keyword', (req, res) => {
     business.getBusiness(req.params.keyword)
       .then(result => {
-        console.log(result.size);
+        console.log(result);
 
         result.size === 0 ?
           yelp.search(req.params.keyword)

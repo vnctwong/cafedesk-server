@@ -1,4 +1,5 @@
-const Business = require('../models').Business
+const Business = require('../models').Business;
+const Op = require('Sequelize').Op;
 
 module.exports = {
   create(req, res) {
@@ -15,10 +16,13 @@ module.exports = {
   },
 
   getBusiness(query) {
-    console.log(query);
+    query = '%' + query + '%';
+
     return Business.findAll({
       where: {
-        name: query
+        name: {
+          [Op.like]: query
+        }
       }
     });
   }
