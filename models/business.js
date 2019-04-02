@@ -3,8 +3,9 @@ module.exports = (sequelize, DataTypes) => {
 
   const Business = sequelize.define('Business', {
     name: DataTypes.STRING,
+    img_url: DataTypes.STRING(1234)
     address: DataTypes.STRING,
-    description: DataTypes.STRING(1234)
+    yelp_id: DataTypes.STRING,
   }, {});
 
   Business.associate = function (models) {
