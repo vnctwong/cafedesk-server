@@ -26,12 +26,17 @@ module.exports = () => {
 
 function foundLocal(res, result) {
   res.status(200).send(result);
+
+  // check age of results, if too long update db from yelp
 }
 
 function nothingLocal(res, keyword) {
   yelp.search(keyword)
     .then(response => {
       res.status(200).send(response.data);
+
+      // loop through results and add them to db
+      response.businesses.forEach(element => {});
     })
     .catch(error => {
       console.log(error);
