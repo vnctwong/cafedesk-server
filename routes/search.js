@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const yelp = require('../api/yelp')
-const business = require('../controllers/business')
+const Business = require('../controllers/business')
 
 module.exports = () => {
   // search route
   router.get('/:keyword', (req, res) => {
     // query db to see if keyword can be found locally
-    business.search(req.params.keyword)
+    Business.search(req.params.keyword)
       .then(result => {
         result.length === 0 ?
           // if no results found locally query yelp api
@@ -45,7 +45,7 @@ function nothingLocal(res, keyword) {
     .finally(() => {
       // loop through results and add them to db
       data.businesses.forEach(element => {
-        business.create(element)
+        Business.create(element)
           .catch(error => {
             console.log('Error with adding to DB');
             console.error(error);
