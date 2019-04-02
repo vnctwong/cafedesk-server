@@ -35,6 +35,7 @@ function nothingLocal(res, keyword) {
 
   yelp.search(keyword)
     .then((response) => {
+      // store response locally and send result to user
       data = response.data;
       res.status(200).send(data)
     })
