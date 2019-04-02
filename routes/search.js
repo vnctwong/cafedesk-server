@@ -36,7 +36,7 @@ function nothingLocal(res, keyword) {
       res.status(200).send(response.data);
 
       // loop through results and add them to db
-      response.businesses.forEach(element => {});
+      // response.businesses.forEach(element => {});
     })
     .catch(error => {
       console.log(error);
