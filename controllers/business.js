@@ -15,7 +15,7 @@ module.exports = {
       });
   },
 
-  getBusiness(query) {
+  search(query) {
     query = '%' + query + '%';
 
     return Business.findAll({
