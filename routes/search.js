@@ -31,14 +31,24 @@ function foundLocal(res, result) {
 }
 
 function nothingLocal(res, keyword) {
-  yelp.search(keyword)
-    .then(response => {
-      res.status(200).send(response.data);
+  let data;
 
-      // loop through results and add them to db
-      // response.businesses.forEach(element => {});
+  yelp.search(keyword)
+    .then((response) => {
+      data = response.data;
+      res.status(200).send(data)
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send(error);
     })
+    .finally(() => {
+      // loop through results and add them to db
+      data.businesses.forEach(element => {
+        business.create(element)
+          .catch(error => {
+            console.log('Error with adding to DB');
+            console.error(error);
+          });
+      });
+    });
 }
