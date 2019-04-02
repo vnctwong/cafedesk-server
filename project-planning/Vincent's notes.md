@@ -23,3 +23,6 @@
   - addColumn over edit DB, why
   - diff btwn sqlz & psql fnclty
   - hasOne, belongsTo, hasMany, belongsToMany. To add columns, do we edit migrations or models
+
+## Controllers
+  - How to add new tags, favorites, etc into DB
