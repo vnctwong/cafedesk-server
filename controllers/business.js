@@ -6,8 +6,8 @@ module.exports = {
     return Business
       .create({
         name: business.name,
+        img_url: business.image_url,
         address: business.location.display_address.join(' '),
-        description: "beep boop i'm a robot",
         yelp_id: business.id,
       });
   },
