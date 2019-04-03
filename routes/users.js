@@ -15,10 +15,17 @@ module.exports = () => {
     res.send(`User ${req.params.user_id}'s view history`);
   });
 
+  router.post('/:user_id/favourites', (req, res) => {
+    res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
+  });
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
     res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
   });
-  router.post('/:user_id/favourites/:view_id', (req, res) => {
+
+  router.post('/:user_id/views', (req, res) => {
+    res.send(`User ${req.params.user_id}'s view with id ${req.params.view_id}`);
+  });
+  router.post('/:user_id/views/:view_id', (req, res) => {
     res.send(`User ${req.params.user_id}'s view with id ${req.params.view_id}`);
   });
 

@@ -13,7 +13,7 @@ module.exports = () => {
         result.length === 0 ?
           // if no results found locally query yelp api
           nothingLocal(res, req.params.keyword) :
-          // if results found locally dispaly results
+          // if results found locally display results
           foundLocal(res, result);
       })
       .catch(err => {
