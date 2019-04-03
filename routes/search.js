@@ -2,23 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 const yelp = require('../api/yelp')
-const Business = require('../controllers/business')
+// const Business = require('../controllers/business')
 
 module.exports = () => {
   // search route
   router.get('/:keyword', (req, res) => {
     // query db to see if keyword can be found locally
-    Business.search(req.params.keyword)
-      .then(result => {
-        result.length === 0 ?
-          // if no results found locally query yelp api
-          nothingLocal(res, req.params.keyword) :
-          // if results found locally display results
-          foundLocal(res, result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // Business.search(req.params.keyword)
+    //   .then(result => {
+    //     result.length === 0 ?
+    // if no results found locally query yelp api
+    nothingLocal(res, req.params.keyword) //:
+    // if results found locally display results
+    //         foundLocal(res, result);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
   });
 
   return router;
@@ -42,18 +42,18 @@ function nothingLocal(res, keyword) {
     .catch((error) => {
       res.status(500).send(error);
     })
-    .finally(() => {
-      // loop through results and add them to db if they are not already stored
-      data.businesses.forEach(element => {
-        Business.search(element.name).then((result) => {
-          if (result.length === 0) {
-            Business.create(element)
-              .catch(error => {
-                console.log('Error with adding to DB');
-                console.error(error);
-              })
-          };
-        })
-      });
-    });
+  // .finally(() => {
+  //   // loop through results and add them to db if they are not already stored
+  //   data.businesses.forEach(element => {
+  //     Business.search(element.name).then((result) => {
+  //       if (result.length === 0) {
+  //         Business.create(element)
+  //           .catch(error => {
+  //             console.log('Error with adding to DB');
+  //             console.error(error);
+  //           })
+  //       };
+  //     })
+  //   });
+  // });
 }
