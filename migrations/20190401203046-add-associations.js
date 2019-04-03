@@ -50,7 +50,7 @@ module.exports = {
       .then(() => {
         // Payment hasOne Order
         return queryInterface.addColumn(
-          'User_fav_stores', // name of Target model
+          'User_fav_businesses', // name of Target model
           'BusinessId', // name of the key we're adding
           {
             type: Sequelize.INTEGER,
@@ -66,7 +66,7 @@ module.exports = {
       .then(() => {
         // Payment hasOne Order
         return queryInterface.addColumn(
-          'User_view_stores', // name of Target model
+          'User_viewed_businesses', // name of Target model
           'BusinessId', // name of the key we're adding
           {
             type: Sequelize.INTEGER,
@@ -82,7 +82,7 @@ module.exports = {
       .then(() => {
         // Payment hasOne Order
         return queryInterface.addColumn(
-          'User_fav_stores', // name of Target model
+          'User_fav_businesses', // name of Target model
           'UserId', // name of the key we're adding
           {
             type: Sequelize.INTEGER,
@@ -98,7 +98,7 @@ module.exports = {
       .then(() => {
         // Payment hasOne Order
         return queryInterface.addColumn(
-          'User_view_stores', // name of Target model
+          'User_view_businesses', // name of Target model
           'UserId', // name of the key we're adding
           {
             type: Sequelize.INTEGER,
@@ -136,28 +136,28 @@ module.exports = {
       .then(() => {
         // remove Payment hasOne Order
         return queryInterface.removeColumn(
-          'User_fav_stores', // name of the Target model
+          'User_fav_businesses', // name of the Target model
           'BusinessId', // key we want to remove
         );
       })
       .then(() => {
         // remove Payment hasOne Order
         return queryInterface.removeColumn(
-          'User_fav_stores', // name of the Target model
+          'User_fav_businesses', // name of the Target model
           'UserId' // key we want to remove
         );
       })
       .then(() => {
         // remove Payment hasOne Order
         return queryInterface.removeColumn(
-          'User_view_stores', // name of the Target model
+          'User_viewed_businesses', // name of the Target model
           'UserId' // key we want to remove
         );
       })
       .then(() => {
         // remove Payment hasOne Order
         return queryInterface.removeColumn(
-          'User_view_stores', // name of the Target model
+          'User_viewed_businesses', // name of the Target model
           'BusinessId' // key we want to remove
         );
       })
