@@ -17,7 +17,7 @@
 # Routing
   - session or persistent
     * if search has multiple layers (i.e. search keyword, then filter), 1 or 2 routes 
-  - ! How to get location from user from browser / cookie
+  - ? How to get location from user from browser / cookie
   - use wireframe to re-check required routes
 
 ## Sequelize
@@ -33,10 +33,26 @@
 ## Users
   - create
     * when post req @ /users, create user in db
-### fav business
+### fav_business
   - create
-    * when post req @ route/users/LN18, create row in DB (boolean = true)
+    * when post req @ route/users/LN18, create row in DB & is_favorite = true
+    * column is_fav needed?
   - update
-    * when post req @ route/users/LN21, update row in DB (boolean false)
-### view business
-  - need to update updatedAt, what params need to be passed? 
+    * when post req @ route/users/LN21, update is_favorite boolean true | false
+    * ? delete row or not? 
+### viewed_business
+  - create
+    * when is this accessed?
+    * if !businessId create row
+  - else update updateAt = sequelize.DATE
+  - is viewed needed?
+## business
+  - search coffee, inserts DB (search by cat)
+  - search juice, inserts DB (!search cat but shows cat)
+  - search by coffee, new inserts DB (!search cat, !show cat)
+  - search bakery, show DB name but !cat
+  - search coffee, show DB, but only last search
+    * search coffee, inserts DB (search by cat)
+    * search bake, show DB, but !cat
+    * search bakery, same
+    * search coffee, 20 new entry & !search cat
