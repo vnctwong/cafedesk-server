@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       is_favorite: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       createdAt: {

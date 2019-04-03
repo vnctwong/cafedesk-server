@@ -6,6 +6,7 @@ module.exports = {
     return queryInterface.addColumn(
         'Businesses',
         'longitude', {
+          allowNull: false,
           type: Sequelize.FLOAT,
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
@@ -16,6 +17,7 @@ module.exports = {
         return queryInterface.addColumn(
           'Businesses',
           'latitude', {
+            allowNull: false,
             type: Sequelize.FLOAT,
             onUpdate: 'CASCADE',
             onDelete: 'SET NULL',

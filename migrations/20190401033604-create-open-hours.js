@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       day: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       open_time: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       close_time: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

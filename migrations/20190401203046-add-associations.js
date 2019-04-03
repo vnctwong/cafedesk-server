@@ -98,7 +98,7 @@ module.exports = {
       .then(() => {
         // Payment hasOne Order
         return queryInterface.addColumn(
-          'User_view_businesses', // name of Target model
+          'User_viewed_businesses', // name of Target model
           'UserId', // name of the key we're adding
           {
             type: Sequelize.INTEGER,
