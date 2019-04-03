@@ -13,7 +13,7 @@ module.exports = () => {
         result.length === 0 ?
           // if no results found locally query yelp api
           nothingLocal(res, req.params.keyword) :
-          // if results found locally dispaly results
+          // if results found locally display results
           foundLocal(res, result);
       })
       .catch(err => {
@@ -43,13 +43,17 @@ function nothingLocal(res, keyword) {
       res.status(500).send(error);
     })
     .finally(() => {
-      // loop through results and add them to db
+      // loop through results and add them to db if they are not already stored
       data.businesses.forEach(element => {
-        Business.create(element)
-          .catch(error => {
-            console.log('Error with adding to DB');
-            console.error(error);
-          });
+        Business.search(element.name).then((result) => {
+          if (result.length === 0) {
+            Business.create(element)
+              .catch(error => {
+                console.log('Error with adding to DB');
+                console.error(error);
+              })
+          };
+        })
       });
     });
 }
