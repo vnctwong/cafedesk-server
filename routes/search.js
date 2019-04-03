@@ -31,29 +31,31 @@ function foundLocal(res, result) {
 }
 
 function nothingLocal(res, keyword) {
-  let data;
-
   yelp.search(keyword)
     .then((response) => {
       // store response locally and send result to user
-      data = response.data;
+      const data = response.data;
       res.status(200).send(data)
+
+      // loop through results and add them to db if they are not already stored
+      addToDatabase(data);
     })
     .catch((error) => {
       res.status(500).send(error);
     })
-    .finally(() => {
-      // loop through results and add them to db if they are not already stored
-      data.businesses.forEach(element => {
-        Business.search(element.name).then((result) => {
-          if (result.length === 0) {
-            Business.create(element)
-              .catch(error => {
-                console.log('Error with adding to DB');
-                console.error(error);
-              })
-          };
-        })
-      });
-    });
+    .finally(() => {});
+}
+
+function addToDatabase(data) {
+  data.businesses.forEach(element => {
+    Business.search(element.name).then((result) => {
+      if (result.length === 0) {
+        Business.create(element)
+          .catch(error => {
+            console.log('Error with adding to DB');
+            console.error(error);
+          })
+      };
+    })
+  });
 }
