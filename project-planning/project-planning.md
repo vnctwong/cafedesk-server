@@ -16,7 +16,7 @@
 - As a user, I want to be able to favourite locations and check history locations because I want to keep track of them.
 - As a user, I want to see my choices on a map because it helps me to plan my day trip.
 - As a user, I want to be able to vote on tags because I want to help other users by specifying search queries.
-- As a user, I want to be able to get more details of other users and stores because I want to know more about them. 
+- As a user, I want to be able to get more details of other users and businesses because I want to know more about them. 
 - *STRETCH* As a bootcamp student, I want to pair program with my cohort mate and **coordinate** a location (shared page) because we may  have different preferences. 
 
 
@@ -25,7 +25,7 @@
 - Preferences
 - Tags
 - Favourites
-- Detail pages: Store, User
+- Detail pages: business, User
 - Map
 
 ## Stretch
@@ -35,15 +35,15 @@
 - Surprise / Random 
 - Filter transit
 - Friends: tied to group, share location, checkin
-- Store /Admin
+- business /Admin
 - Reward for user contribution to rating and review, super user
 - Third-party login
-- Store admin (basic input)
+- business admin (basic input)
 
 ## Wireframes
 home page (initial search bar)
 result page 
-store page
+business page
 user page
 admin page
 

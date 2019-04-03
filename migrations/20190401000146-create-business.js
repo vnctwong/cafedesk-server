@@ -20,6 +20,7 @@ module.exports = {
         type: Sequelize.STRING(1234)
       },
       yelp_id: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

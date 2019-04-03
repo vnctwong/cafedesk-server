@@ -1,15 +1,18 @@
-## Ideation
+# Ideation
   - project with tech or market user demand (perspective to build from)
 
-## ERD
+
+# ERD
   - running through ERD with user stories + queries to check database structure
 
-## Wireframing
+
+# Wireframing
   - differentiating search and preference
    * how users will nav back and forth
    * work process: do we settle on core and build around or change as we go
    * what is recognizable to new / power users
    * breakpoints for too much repetition of elements
+
 
 # Routing
   - session or persistent
@@ -24,5 +27,16 @@
   - diff btwn sqlz & psql fnclty
   - hasOne, belongsTo, hasMany, belongsToMany. To add columns, do we edit migrations or models
 
-## Controllers
+
+# Controllers
   - How to add new tags, favorites, etc into DB
+## Users
+  - create
+    * when post req @ /users, create user in db
+### fav business
+  - create
+    * when post req @ route/users/LN18, create row in DB (boolean = true)
+  - update
+    * when post req @ route/users/LN21, update row in DB (boolean false)
+### view business
+  - need to update updatedAt, what params need to be passed? 
