@@ -8,6 +8,8 @@ module.exports = {
         name: business.name,
         img_url: business.image_url,
         address: business.location.display_address.join(' '),
+        longitude: business.coordinates.longitude,
+        latitude: business.coordinates.latitude,
         yelp_id: business.id,
       });
   },
