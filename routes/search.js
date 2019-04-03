@@ -47,9 +47,11 @@ function nothingLocal(res, keyword) {
 }
 
 function addToDatabase(data) {
+  // loop through all results and search through db
   data.businesses.forEach(element => {
     Business.search(element.name).then((result) => {
       if (result.length === 0) {
+        // create if business not found in db
         Business.create(element)
           .catch(error => {
             console.log('Error with adding to DB');
