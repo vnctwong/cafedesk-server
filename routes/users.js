@@ -10,6 +10,12 @@ module.exports = () => {
       .then((result) => {
         res.send(result)
       })
+    console.log('~~~~~~~~~~~~',
+      User.findAll({
+        where: {
+          id: 1
+        }
+      })[0].User_fav_business)
   });
   router.get('/:user_id', (req, res) => {
     // * pull row in db where id = ${req.params.user_id}
@@ -41,7 +47,10 @@ module.exports = () => {
   });
 
   router.post('/:user_id/favourites', (req, res) => {
-    res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
+    // * create row in user_fav for user_id and business_id
+    User_fav_business.create(req.params.user_id, req.params.business_id);
+    // return result to res.send
+    res.send(`User ${req.params.user_id}'s favourited with id ${req.params.business_id}`);
   });
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
     res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
