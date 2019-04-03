@@ -45,11 +45,15 @@ function nothingLocal(res, keyword) {
     .finally(() => {
       // loop through results and add them to db
       data.businesses.forEach(element => {
-        Business.create(element)
-          .catch(error => {
-            console.log('Error with adding to DB');
-            console.error(error);
-          });
+        Business.search(element.name).then((result) => {
+          if (result.length === 0) {
+            Business.create(element)
+              .catch(error => {
+                console.log('Error with adding to DB');
+                console.error(error);
+              })
+          };
+        })
       });
     });
 }
