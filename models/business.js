@@ -1,6 +1,4 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-
   const Business = sequelize.define('Business', {
     name: DataTypes.STRING,
     img_url: DataTypes.STRING(1234),
@@ -10,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     latitude: DataTypes.FLOAT,
   }, {});
 
-  Business.associate = function (models) {
+  Business.associate = (models) => {
     // associations can be defined here
     Business.hasMany(models.Open_hours);
     Business.hasMany(models.Tag);

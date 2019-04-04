@@ -1,37 +1,26 @@
 const express = require('express');
+
 const router = express.Router();
 
 const db = require('../models');
 const User_fav_business = require('../controllers/user_fav_business');
-const Sequelize = require('sequelize')
-// const Sequelize = require('sequelize')
-
 
 module.exports = () => {
   router.get('/', (req, res) => {
     db.User.findAll()
       .then((result) => {
-        res.send(result)
-      })
-
-    const promise = db.User.findAll({
-      include: 'Favs'
-
-    });
-    console.log('~~~~~~', promise)
-    promise.then((result) => {
-      console.log(result[0]);
-    })
+        res.send(result);
+      });
   });
   router.get('/:user_id', (req, res) => {
     // * pull row in db where id = ${req.params.user_id}
     // model(search by id)
-    User.findUserById(req.params.user_id)
+    db.User.findUserById(req.params.user_id)
       // get a search result/obj
       .then((result) => {
         // res.send(result)
-        res.send(result)
-      })
+        res.send(result);
+      });
   });
   router.get('/:user_id/favourites', (req, res) => {
     // * find all favs for user id
@@ -39,8 +28,8 @@ module.exports = () => {
     User_fav_business.findByUserId(req.params.user_id)
       // res.send(search results)
       .then((result) => {
-        res.send(result)
-      })
+        res.send(result);
+      });
     // res.send(`User ${req.params.user_id}'s favourites`);
   });
   router.get('/:user_id/views', (req, res) => {
@@ -48,8 +37,8 @@ module.exports = () => {
   });
 
   router.post('/', (req, res) => {
-    User.create();
-    res.send(`Created user`);
+    db.User.create();
+    res.send('Created user');
   });
 
   router.post('/:user_id/favourites', (req, res) => {
@@ -70,4 +59,4 @@ module.exports = () => {
   });
 
   return router;
-}
+};

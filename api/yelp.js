@@ -7,7 +7,7 @@ const auth = `Bearer ${process.env.YELP_KEY}`;
 function search(query, longitude = -123.1207, latitude = 49.2827) {
   return axios.get(`https://api.yelp.com/v3/businesses/search?term=${query}&latitude=${latitude}&longitude=${longitude}`, {
     headers: {
-      Authorization: auth
+      Authorization: auth,
     },
   });
 }
@@ -15,12 +15,12 @@ function search(query, longitude = -123.1207, latitude = 49.2827) {
 function getBusiness(query) {
   return axios.get(`https://api.yelp.com/v3/businesses/${query}`, {
     headers: {
-      Authorization: auth
+      Authorization: auth,
     },
   });
 }
 
 module.exports = {
   search,
-  getBusiness
+  getBusiness,
 };

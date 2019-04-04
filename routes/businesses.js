@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const yelp = require('../api/yelp');
 
-const yelp = require('../api/yelp')
+const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
@@ -9,13 +9,13 @@ module.exports = () => {
   });
   router.get('/:business_id', (req, res) => {
     yelp.getBusiness(req.params.business_id)
-      .then(response => {
+      .then((response) => {
         res.status(200).send(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        res.status(500).send(error);
       });
   });
 
   return router;
-}
+};

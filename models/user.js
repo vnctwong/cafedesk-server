@@ -1,17 +1,13 @@
-'use strict';
-// const User_fav_business = require('../models').User_fav_business;
-
 module.exports = (sequelize, DataTypes) => {
-
   const User = sequelize.define('User', {
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {});
 
-  User.associate = function (models) {
+  User.associate = (models) => {
     // associations can be defined here
     User.hasMany(models.Tag);
     const {
-      Business
+      Business,
     } = models;
     User.belongsToMany(Business, {
       through: 'User_fav_business',
@@ -19,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'UserId',
     });
     Business.belongsToMany(User, {
-      through: 'User_fav_business'
+      through: 'User_fav_business',
     });
 
 
