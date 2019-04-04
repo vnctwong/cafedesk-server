@@ -1,21 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../controllers/user');
+const db = require('../models');
 const User_fav_business = require('../controllers/user_fav_business');
+const Sequelize = require('sequelize')
+// const Sequelize = require('sequelize')
+
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    User.findAll()
+    db.User.findAll()
       .then((result) => {
         res.send(result)
       })
-    console.log('~~~~~~~~~~~~',
-      User.findAll({
-        where: {
-          id: 1
-        }
-      })[0].User_fav_business)
+
+    const promise = db.User.findAll({
+      include: 'Favs'
+
+    });
+    console.log('~~~~~~', promise)
+    promise.then((result) => {
+      console.log(result[0]);
+    })
   });
   router.get('/:user_id', (req, res) => {
     // * pull row in db where id = ${req.params.user_id}
