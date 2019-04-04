@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/xwang1000/cafedesk-server#readme",
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "jest": "^24.5.0"
   },
   "dependencies": {
