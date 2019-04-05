@@ -42,7 +42,7 @@ module.exports = () => {
           });
       });
   });
-  router.post('/:user_id/favourites/:business_id', (req, res) => {
+  router.post('/:user_id/favourites/', (req, res) => {
     // * create row in user_fav for user_id and business_id
     db.User_fav_business.create({
       UserId: req.params.user_id,
@@ -52,8 +52,17 @@ module.exports = () => {
     // return result to res.send
     res.send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
   });
+
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
-    res.send(`User ${req.params.user_id}'s favourite with id ${req.params.favourite_id}`);
+    // on req, delete /:user_id/favourites/:${req.params.favourite_id}
+    db.User_fav_business.destroy({
+      where: {
+        id: req.params.favourite_id,
+      },
+    }).then(() => {
+      // send message ${req.params.user_id} deleted a favorite
+      res.send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
+    });
   });
 
   router.get('/:user_id/views', (req, res) => {

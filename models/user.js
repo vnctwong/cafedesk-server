@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Favs',
       foreignKey: 'UserId',
     });
+    // can move to business
     Business.belongsToMany(User, {
       through: 'User_fav_business',
     });
