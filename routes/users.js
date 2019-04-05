@@ -12,10 +12,11 @@ module.exports = () => {
         res.send(result);
       });
   });
+
   router.get('/:user_id', (req, res) => {
     // * pull row in db where id = ${req.params.user_id}
     // model(search by id)
-    db.User.findUserById(req.params.user_id)
+    db.User.findByPk(req.params.user_id)
       // get a search result/obj
       .then((result) => {
         // res.send(result)
@@ -25,11 +26,23 @@ module.exports = () => {
   router.get('/:user_id/favourites', (req, res) => {
     // * find all favs for user id
     // look favs table, return User_fav_business where userId = req.params.user_id
-    User_fav_business.findByUserId(req.params.user_id)
-      // res.send(search results)
+    db.User.findOne({
+        where: {
+          id: req.params.user_id,
+        },
+      })
       .then((result) => {
-        res.send(result);
+        result.getFavs()
+          .then((favourites) => {
+            res.status(200).send(favourites);
+          });
       });
+
+    // db.User.Favs.findAll()
+    //   // res.send(search results)
+    //   .then((result) => {
+    //     res.send(result);
+    //   });
     // res.send(`User ${req.params.user_id}'s favourites`);
   });
   router.get('/:user_id/views', (req, res) => {
