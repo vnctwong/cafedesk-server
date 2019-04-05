@@ -65,11 +65,22 @@ module.exports = () => {
     });
   });
 
+  router.post('/:user_id/views', (req, res) => {
+    // when req recieve, create row in user_view_business with userId and businessId
+    db.User_viewed_business.create({
+
+      viewed: true,
+      UserId: req.params.user_id,
+      // route not set to handle businessId atm
+      BusinessId: 1,
+
+    }).then(() => {
+      // send res saying !!created
+      res.send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
+    });
+  });
   router.get('/:user_id/views', (req, res) => {
     res.send(`User ${req.params.user_id}'s view history`);
-  });
-  router.post('/:user_id/views', (req, res) => {
-    res.send(`User ${req.params.user_id}'s view with id ${req.params.view_id}`);
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
     res.send(`User ${req.params.user_id}'s view with id ${req.params.view_id}`);
