@@ -3,24 +3,21 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {});
 
-  User.associate = (models) => {
+  User.associate = ({
+    Business,
+  }) => {
     // associations can be defined here
-    User.hasMany(models.Tag);
-    const {
-      Business,
-    } = models;
     User.belongsToMany(Business, {
       through: 'User_fav_business',
       as: 'Favs',
       foreignKey: 'UserId',
     });
-    // can move to business
-    Business.belongsToMany(User, {
-      through: 'User_fav_business',
+
+    User.belongsToMany(Business, {
+      through: 'User_viewed_business',
+      as: 'Views',
+      foreignKey: 'UserId',
     });
-
-
-    User.hasMany(models.User_viewed_business);
   };
 
   return User;
