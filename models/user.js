@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Views',
       foreignKey: 'UserId',
     });
+
+    User.belongsToMany(Business, {
+      through: 'Tag',
+      as: 'Tags',
+      foreignKey: 'UserId',
+    });
   };
 
   return User;

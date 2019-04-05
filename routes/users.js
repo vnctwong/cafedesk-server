@@ -12,7 +12,9 @@ module.exports = () => {
       });
   });
   router.post('/', (req, res) => {
-    db.User.create();
+    db.User.create({
+      name: 'just test name',
+    });
     res.send('Created user');
   });
 
@@ -49,7 +51,7 @@ module.exports = () => {
       BusinessId: req.params.business_id,
       is_favourite: true,
     });
-    // return result to res.send
+    // need to hardcode businessId for now
     res.send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
   });
 
@@ -101,7 +103,7 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
-    // THIS IS WHY I SAID USE .PUT I HAVE NO IDEA WHAT YOU WANT MAN
+    // THIS IS WHY I SAID USE .PUT 
     db.User_viewed_business.destroy({
         where: {
           id: req.params.view_id,
@@ -110,6 +112,19 @@ module.exports = () => {
       .then(() => {
         res.send(`User ${req.params.user_id} destroyed viewed with id ${req.params.viewed_id}`);
       });
+  });
+
+  router.post('/:user_id/tags/', (req, res) => {
+
+    db.Tag.create({
+      name: 'test tag name',
+      rated: true,
+      UserId: req.params.user_id,
+      // need to hardcode businessId for now
+      BusinessId: 1,
+    });
+    // need to hardcode businessId for now
+    res.send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
   });
 
   return router;
