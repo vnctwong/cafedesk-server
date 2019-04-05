@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      is_favorite: {
+      is_favourite: {
         allowNull: false,
         type: Sequelize.BOOLEAN
       },
