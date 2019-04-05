@@ -56,13 +56,14 @@ module.exports = () => {
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
     // on req, delete /:user_id/favourites/:${req.params.favourite_id}
     db.User_fav_business.destroy({
-      where: {
-        id: req.params.favourite_id,
-      },
-    }).then(() => {
-      // send message ${req.params.user_id} deleted a favorite
-      res.send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
-    });
+        where: {
+          id: req.params.favourite_id,
+        },
+      })
+      .then(() => {
+        // send message ${req.params.user_id} deleted a favorite
+        res.send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
+      });
   });
 
   router.post('/:user_id/views', (req, res) => {
@@ -75,15 +76,40 @@ module.exports = () => {
       BusinessId: 1,
 
     }).then(() => {
-      // send res saying !!created
+      // send res saying created
       res.send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
     });
   });
   router.get('/:user_id/views', (req, res) => {
-    res.send(`User ${req.params.user_id}'s view history`);
+    // *on req, res.send businesses by businessId where UserId = params.user_id
+    // make query on user_viewed_business
+    db.User.findOne({
+        where: {
+          // *select rows where UserId = req.params.user_id
+          id: req.params.user_id,
+        },
+        // chained methods have shared scope
+      })
+      .then((findOneReturns) => {
+        // console.log('what is findAll returning', findOneReturns);
+        // filter result (a promise obj) for businessId (need association)
+        findOneReturns.getViews()
+          .then((associatedViews) => {
+            console.log('what is getViews returning', associatedViews);
+            res.send(associatedViews);
+          });
+      });
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
-    res.send(`User ${req.params.user_id}'s view with id ${req.params.view_id}`);
+    // THIS IS WHY I SAID USE .PUT I HAVE NO IDEA WHAT YOU WANT MAN
+    db.User_viewed_business.destroy({
+        where: {
+          id: req.params.view_id,
+        },
+      })
+      .then(() => {
+        res.send(`User ${req.params.user_id} destroyed viewed with id ${req.params.viewed_id}`);
+      });
   });
 
   return router;

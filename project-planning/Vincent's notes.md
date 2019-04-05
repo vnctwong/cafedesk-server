@@ -46,6 +46,7 @@
     * if !businessId create row
   - else update updateAt = sequelize.DATE
   - is viewed needed?
+  - ? why was get accessor not a function when qrying wrong table/id
 ## business
   - search coffee, inserts DB (search by cat)
   - search juice, inserts DB (!search cat but shows cat)
