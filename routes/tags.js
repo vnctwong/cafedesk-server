@@ -2,10 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
-module.exports = () => {
+const db = require('../models');
 
+module.exports = () => {
   router.get('/', (req, res) => {
-    res.send('All your tags');
+    db.Tag.findAll()
+      .then((result) => {
+        res.send(result);
+      });
   });
 
   return router;
