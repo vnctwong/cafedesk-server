@@ -1,23 +1,22 @@
 const express = require('express');
-
-const router = express.Router();
-
+const {
+  Op,
+} = require('sequelize');
 const yelp = require('../api/yelp');
 const Business = require('../controllers/business');
+const db = require('../models');
+
+const router = express.Router();
 
 module.exports = () => {
   // search route
   router.get('/:keyword', (req, res) => {
-    // query db to see if keyword can be found locally
-    Business.search(req.params.keyword)
-      .then((result) => {
-        result.length === 0
-          // if no results found locally query yelp api
-          ?
-          nothingLocal(res, req.params.keyword)
-          // if results found locally display results
-          :
-          foundLocal(res, result);
+    yelp.search(req.params.keyword)
+      .then((yelpResults) => {
+        return combineWithLocalInfo(yelpResults);
+      })
+      .then((mappedResults) => {
+        res.status(200).send(mappedResults);
       })
       .catch((err) => {
         res.status(500).send(err);
@@ -27,35 +26,43 @@ module.exports = () => {
   return router;
 };
 
-function foundLocal(res, result) {
-  res.status(200).send(result);
-
-  // check age of results, if too long update db from yelp
+async function isFavourite(user_id, business_id) {
+  db.User.fav.businesses.findOne({
+      where: {
+        UserId: user_id,
+        BusinessId: business_id,
+      },
+    })
+    .then((result) => {
+      return result.length !== 0;
+    });
 }
 
-function nothingLocal(res, keyword) {
-  let data;
+function combineWithLocalInfo(yelpResults) {
+  return new Promise((ful, rej) => {
+    const output = [];
 
-  yelp.search(keyword)
-    .then((response) => {
-      // store response locally and send result to user
-      data = response.data;
-      res.status(200).send(data);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    })
-    .finally(() => {
-      // loop through results and add them to db if they are not already stored
-      data.businesses.forEach((element) => {
-        Business.search(element.name).then((result) => {
-          if (result.length === 0) {
-            Business.create(element)
-              .catch((error) => {
-                throw (error);
-              });
+    yelpResults.data.businesses.map((yelpElem) => {
+      db.Business.findOrCreate({
+          where: {
+            yelp_id: yelpElem.id,
+          },
+          defaults: {
+            yelp_id: yelpElem.id,
+            name: yelpElem.name,
+          }
+        })
+        .then((localElem) => {
+          output.push({
+            ...yelpElem,
+            ...localElem[0].dataValues,
+            is_favourite: true,
+          });
+
+          if (output.length === yelpResults.data.businesses.length) {
+            ful(output);
           }
         });
-      });
     });
+  });
 }
