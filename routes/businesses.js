@@ -1,6 +1,9 @@
 const express = require('express');
 const yelp = require('../api/yelp');
 const db = require('../models');
+const {
+  combineOneWithLocalInfo
+} = require('../helpers/combineWithLocal');
 
 const router = express.Router();
 
@@ -29,18 +32,10 @@ module.exports = () => {
   router.get('/:business_id', (req, res) => {
     yelp.getBusiness(req.params.business_id)
       .then((yelpResult) => {
-        db.Business.findOne({
-            where: {
-              yelp_id: yelpResult.data.id,
-            },
-          })
-          .then((specificBusiness) => {
-            if (specificBusiness) {
-              // hard coded for now, to pull additional info from specificBusiness
-              yelpResult.data.ourTags = ['quiet', 'laptop friendly'];
-            }
-            res.status(200).send(yelpResult.data);
-          });
+        return combineOneWithLocalInfo(yelpResult);
+      })
+      .then((specificBusiness) => {
+        res.status(200).send(specificBusiness);
       })
       .catch((error) => {
         res.status(500).send(error);
