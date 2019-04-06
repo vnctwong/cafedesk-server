@@ -1,5 +1,7 @@
 const Business = require('../models').Business;
-const Op = require('Sequelize').Op;
+const {
+  Op
+} = require('Sequelize');
 
 module.exports = {
   create(business) {
@@ -16,11 +18,14 @@ module.exports = {
 
   search(query) {
     return Business.findAll({
-      where: {
-        name: {
-          [Op.iLike]: '%' + query + '%'
+        where: {
+          name: {
+            [Op.iLike]: '%' + query + '%'
+          }
         }
-      }
-    });
+      })
+      .then((searchResults) => {
+        return combineWithLocalInfo(searchResults);
+      });
   }
 }
