@@ -3,10 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     rated: DataTypes.BOOLEAN,
   }, {});
-  Tag.associate = (models) => {
-    // associations can be defined here
-    Tag.belongsTo(models.Business);
-    Tag.belongsTo(models.User);
-  };
+  // Tag.associate = (models) => {
+  //   // associations can be defined here
+  //   Tag.belongsTo(models.Business);
+  //   Tag.belongsTo(models.User);
+  // };
   return Tag;
 };

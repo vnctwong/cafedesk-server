@@ -48,7 +48,8 @@ module.exports = () => {
     // * create row in user_fav for user_id and business_id
     db.User_fav_business.create({
       UserId: req.params.user_id,
-      BusinessId: req.params.business_id,
+      // need to hardcode businessId for now      
+      BusinessId: 1,
       is_favourite: true,
     });
     // need to hardcode businessId for now

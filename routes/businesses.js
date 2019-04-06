@@ -6,7 +6,14 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    db.Business.findAll()
+    db.Business.findAll({
+        // filter businesses THROUGH.WHERE join table
+        where: {
+
+        },
+      })
+      // if (column), dfn new k:v
+      // send new result
       .then((businesses) => {
         res.status(200).send(businesses);
       });
@@ -26,8 +33,8 @@ module.exports = () => {
       });
   });
 
-  router.get('/:business_id', (req, res) => {
-    yelp.getBusiness(req.params.business_id)
+  router.get('/:yelp_id', (req, res) => {
+    yelp.getBusiness(req.params.yelp_id)
       .then((yelpResult) => {
         db.Business.findOne({
             where: {
