@@ -32,6 +32,29 @@ function combineWithLocalInfo(yelpResults) {
   });
 }
 
+function combineOneWithLocalInfo(yelpElem) {
+  return new Promise((ful, rej) => {
+
+    db.Business.findOrCreate({
+        where: {
+          yelp_id: yelpElem.data.id,
+        },
+        defaults: {
+          yelp_id: yelpElem.data.id,
+          name: yelpElem.data.name,
+        }
+      })
+      .then((localElem) => {
+        ful({
+          ...yelpElem.data,
+          ...localElem[0].dataValues,
+          is_favourite: true,
+        });
+      });
+  });
+}
+
 module.exports = {
   combineWithLocalInfo,
+  combineOneWithLocalInfo,
 };
