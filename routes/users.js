@@ -104,13 +104,19 @@ module.exports = () => {
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
     // THIS IS WHY I SAID USE .PUT 
-    db.User_viewed_business.destroy({
+    db.User_viewed_business.findOne({
         where: {
           id: req.params.view_id,
         },
       })
-      .then(() => {
-        res.send(`User ${req.params.user_id} destroyed viewed with id ${req.params.viewed_id}`);
+      .then((findOneReturns) => {
+        const newDateTime = new Date();
+        console.log(newDateTime);
+        // THIS ROUTE DOES NOT WORK
+        findOneReturns.update({
+          updatedAt: newDateTime,
+        });
+        res.send(`User ${req.params.user_id} updated view id ${req.params.viewed_id}`);
       });
   });
 
@@ -125,6 +131,21 @@ module.exports = () => {
     });
     // need to hardcode businessId for now
     res.send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
+  });
+
+  router.get('/:user_id/tags', (req, res) => {
+    db.User.findOne({
+        where: {
+          id: req.params.user_id,
+        },
+      })
+      .then((findOneReturns) => {
+        findOneReturns.getTags()
+          .then((associatedTags) => {
+            console.log('what is getTags returning', associatedTags);
+            res.send(associatedTags);
+          });
+      });
   });
 
   return router;
