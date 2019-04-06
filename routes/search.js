@@ -1,10 +1,9 @@
 const express = require('express');
-const {
-  Op,
-} = require('sequelize');
 const yelp = require('../api/yelp');
-const Business = require('../controllers/business');
 const db = require('../models');
+const {
+  combineWithLocalInfo
+} = require('../helpers/combineWithLocal');
 
 const router = express.Router();
 
@@ -15,8 +14,8 @@ module.exports = () => {
       .then((yelpResults) => {
         return combineWithLocalInfo(yelpResults);
       })
-      .then((mappedResults) => {
-        res.status(200).send(mappedResults);
+      .then((combinedResults) => {
+        res.status(200).send(combinedResults);
       })
       .catch((err) => {
         res.status(500).send(err);
@@ -25,44 +24,3 @@ module.exports = () => {
 
   return router;
 };
-
-async function isFavourite(user_id, business_id) {
-  db.User.fav.businesses.findOne({
-      where: {
-        UserId: user_id,
-        BusinessId: business_id,
-      },
-    })
-    .then((result) => {
-      return result.length !== 0;
-    });
-}
-
-function combineWithLocalInfo(yelpResults) {
-  return new Promise((ful, rej) => {
-    const output = [];
-
-    yelpResults.data.businesses.map((yelpElem) => {
-      db.Business.findOrCreate({
-          where: {
-            yelp_id: yelpElem.id,
-          },
-          defaults: {
-            yelp_id: yelpElem.id,
-            name: yelpElem.name,
-          }
-        })
-        .then((localElem) => {
-          output.push({
-            ...yelpElem,
-            ...localElem[0].dataValues,
-            is_favourite: true,
-          });
-
-          if (output.length === yelpResults.data.businesses.length) {
-            ful(output);
-          }
-        });
-    });
-  });
-}
