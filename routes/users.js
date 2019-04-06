@@ -103,20 +103,15 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
-    // THIS IS WHY I SAID USE .PUT 
-    db.User_viewed_business.findOne({
+    db.User_viewed_business.update({
+        viewed: true,
+      }, {
         where: {
           id: req.params.view_id,
         },
       })
-      .then((findOneReturns) => {
-        const newDateTime = new Date();
-        console.log(newDateTime);
-        // THIS ROUTE DOES NOT WORK
-        findOneReturns.update({
-          updatedAt: newDateTime,
-        });
-        res.send(`User ${req.params.user_id} updated view id ${req.params.viewed_id}`);
+      .then(() => {
+        res.send(`User ${req.params.user_id} viewed id ${req.params.viewed_id}`);
       });
   });
 
