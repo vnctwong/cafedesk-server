@@ -2,7 +2,7 @@ const express = require('express');
 const yelp = require('../api/yelp');
 const db = require('../models');
 const {
-  combineOneWithLocalInfo
+  combineOneWithLocalInfo,
 } = require('../helpers/combineWithLocal');
 
 const router = express.Router();
