@@ -3,7 +3,7 @@ const {
   isFavourite
 } = require('../helpers/isFavourite');
 
-function combineWithLocalInfo(yelpResults) {
+function combineWithLocalInfo(yelpResults, user_id = 1) {
   return new Promise((ful, rej) => {
     const output = [];
 
@@ -23,7 +23,7 @@ function combineWithLocalInfo(yelpResults) {
             ...localElem[0].dataValues,
           };
 
-          isFavourite(1, localElem[0].id)
+          isFavourite(user_id, localElem[0].id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
               output.push(elemOut);

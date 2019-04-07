@@ -3,7 +3,7 @@ const {
   isFavourite,
 } = require('../helpers/isFavourite');
 
-function combineWithRemoteInfo(localResults) {
+function combineWithRemoteInfo(localResults, user_id = 1) {
   return new Promise((ful, rej) => {
     const output = [];
 
@@ -15,7 +15,7 @@ function combineWithRemoteInfo(localResults) {
             ...localElem.dataValues,
           };
 
-          isFavourite(1, localElem.id)
+          isFavourite(user_id, localElem.id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
               output.push(elemOut);
