@@ -144,9 +144,11 @@ module.exports = () => {
       })
       .then((findOneReturns) => {
         findOneReturns.getTags()
-          .then((associatedTags) => {
-            console.log('what is getTags returning', associatedTags);
-            res.send(associatedTags);
+          .then((tags) => {
+            return combineWithRemoteInfo(tags);
+          })
+          .then((combinedTags) => {
+            res.send(combinedTags);
           });
       });
   });
