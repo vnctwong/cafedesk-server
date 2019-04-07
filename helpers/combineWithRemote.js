@@ -22,7 +22,7 @@ function combineWithRemoteInfo(localResults, user_id = 1) {
             .then((result) => {
               elemOut.is_favourite = result !== null;
             });
-          getTags(localElem[0].id)
+          getTags(localElem.id)
             .then((result) => {
               elemOut.tags = result;
             })

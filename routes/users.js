@@ -42,6 +42,7 @@ module.exports = () => {
       .then((result) => {
         result.getFavs()
           .then((favourites) => {
+            console.log(favourites);
             return combineWithRemoteInfo(favourites);
           })
           .then((combinedFavourites) => {
