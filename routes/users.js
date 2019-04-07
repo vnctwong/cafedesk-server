@@ -102,9 +102,11 @@ module.exports = () => {
         // console.log('what is findAll returning', findOneReturns);
         // filter result (a promise obj) for businessId (need association)
         findOneReturns.getViews()
-          .then((associatedViews) => {
-            console.log('what is getViews returning', associatedViews);
-            res.send(associatedViews);
+          .then((views) => {
+            return combineWithRemoteInfo(views);
+          })
+          .then((combinedViews) => {
+            res.send(combinedViews);
           });
       });
   });
