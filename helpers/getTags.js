@@ -2,8 +2,6 @@ const db = require('../models');
 
 function getTags(business_id) {
   return db.Tag.findAll({
-      // Attributes: ['name'],
-      // group: ['name'],
       where: {
         BusinessId: business_id,
       },
