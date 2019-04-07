@@ -1,7 +1,7 @@
-const {
-  Op,
-} = require('sequelize');
 const db = require('../models');
+const {
+  isFavourite
+} = require('../helpers/isFavourite');
 
 function combineWithLocalInfo(yelpResults) {
   return new Promise((ful, rej) => {
@@ -63,17 +63,6 @@ function combineOneWithLocalInfo(yelpElem) {
             ful(output);
           });
       });
-  });
-}
-
-function isFavourite(user_id, business_id) {
-  return db.User_fav_business.findOne({
-    where: {
-      [Op.and]: {
-        UserId: user_id,
-        BusinessId: business_id,
-      },
-    },
   });
 }
 
