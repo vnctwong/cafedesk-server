@@ -1,8 +1,10 @@
 const express = require('express');
+const db = require('../models');
+const {
+  combineWithRemoteInfo
+} = require('../helpers/combineWithRemote');
 
 const router = express.Router();
-
-const db = require('../models');
 
 module.exports = () => {
   router.get('/', (req, res) => {
@@ -40,7 +42,10 @@ module.exports = () => {
       .then((result) => {
         result.getFavs()
           .then((favourites) => {
-            res.status(200).send(favourites);
+            return combineWithRemoteInfo(favourites);
+          })
+          .then((combinedFavourites) => {
+            res.status(200).send(combinedFavourites);
           });
       });
   });
@@ -48,7 +53,8 @@ module.exports = () => {
     // * create row in user_fav for user_id and business_id
     db.User_fav_business.create({
       UserId: req.params.user_id,
-      BusinessId: req.params.business_id,
+      // need to hardcode businessId for now      
+      BusinessId: 1,
       is_favourite: true,
     });
     // need to hardcode businessId for now
@@ -96,9 +102,11 @@ module.exports = () => {
         // console.log('what is findAll returning', findOneReturns);
         // filter result (a promise obj) for businessId (need association)
         findOneReturns.getViews()
-          .then((associatedViews) => {
-            console.log('what is getViews returning', associatedViews);
-            res.send(associatedViews);
+          .then((views) => {
+            return combineWithRemoteInfo(views);
+          })
+          .then((combinedViews) => {
+            res.send(combinedViews);
           });
       });
   });
@@ -136,9 +144,11 @@ module.exports = () => {
       })
       .then((findOneReturns) => {
         findOneReturns.getTags()
-          .then((associatedTags) => {
-            console.log('what is getTags returning', associatedTags);
-            res.send(associatedTags);
+          .then((tags) => {
+            return combineWithRemoteInfo(tags);
+          })
+          .then((combinedTags) => {
+            res.send(combinedTags);
           });
       });
   });

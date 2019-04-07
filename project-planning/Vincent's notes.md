@@ -57,3 +57,5 @@
     * search bake, show DB, but !cat
     * search bakery, same
     * search coffee, 20 new entry & !search cat
+# Filter business by favorite
+

@@ -8,12 +8,27 @@ module.exports = (sequelize, DataTypes) => {
     latitude: DataTypes.FLOAT,
   }, {});
 
-  Business.associate = (models) => {
+  Business.associate = ({
+    User,
+  }) => {
     // associations can be defined here
-    Business.hasMany(models.Open_hours);
-    Business.hasMany(models.Tag);
-    Business.hasMany(models.User_fav_business);
-    Business.hasMany(models.User_viewed_business);
+    Business.belongsToMany(User, {
+      through: 'User_fav_business',
+      as: 'Favs',
+      foreignKey: 'BusinessId',
+    });
+
+    Business.belongsToMany(User, {
+      through: 'User_viewed_business',
+      as: 'Views',
+      foreignKey: 'BusinessId',
+    });
+
+    Business.belongsToMany(User, {
+      through: 'Tag',
+      as: 'Tags',
+      foreignKey: 'BusinessId',
+    });
   };
 
   return Business;
