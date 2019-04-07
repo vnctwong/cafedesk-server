@@ -1,8 +1,10 @@
 const express = require('express');
+const db = require('../models');
+const {
+  combineWithRemoteInfo
+} = require('../helpers/combineWithRemote');
 
 const router = express.Router();
-
-const db = require('../models');
 
 module.exports = () => {
   router.get('/', (req, res) => {
@@ -40,7 +42,10 @@ module.exports = () => {
       .then((result) => {
         result.getFavs()
           .then((favourites) => {
-            res.status(200).send(favourites);
+            return combineWithRemoteInfo(favourites);
+          })
+          .then((combinedFavourites) => {
+            res.status(200).send(combinedFavourites);
           });
       });
   });
