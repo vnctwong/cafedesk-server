@@ -3,6 +3,9 @@ const {
   Op
 } = require('Sequelize');
 const db = require('../models');
+const {
+  combineWithRemoteInfo
+} = require('../helpers/combineWithRemote');
 
 const router = express.Router();
 
@@ -32,13 +35,13 @@ module.exports = () => {
               },
             },
           })
-          .then((businessArray) => {
-            res.send(businessArray);
+          .then((businessResults) => {
+            return combineWithRemoteInfo(businessResults);
+          })
+          .then((combinedResults) => {
+            res.send(combinedResults);
           });
       });
-
-
-    // res.send('Your recommendations!');
   });
 
   return router;
