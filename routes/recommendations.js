@@ -4,7 +4,7 @@ const {
 } = require('Sequelize');
 const db = require('../models');
 const {
-  combineWithRemoteInfo
+  combineWithRemoteInfo,
 } = require('../helpers/combineWithRemote');
 
 const router = express.Router();
