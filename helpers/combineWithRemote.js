@@ -1,22 +1,30 @@
 const yelp = require('../api/yelp');
+const {
+  isFavourite,
+} = require('../helpers/isFavourite');
 
-function combineWithRemoteInfo(localResults) {
+function combineWithRemoteInfo(localResults, user_id = 1) {
   return new Promise((ful, rej) => {
     const output = [];
 
     localResults.map((localElem) => {
       yelp.getBusiness(localElem.yelp_id)
         .then((yelpElem) => {
-          console.log(yelpElem.data)
-          output.push({
+          const elemOut = {
             ...yelpElem.data,
             ...localElem.dataValues,
-            is_favourite: true,
-          });
+          };
 
-          if (output.length === localResults.length) {
-            ful(output);
-          }
+          isFavourite(user_id, localElem.id)
+            .then((result) => {
+              elemOut.is_favourite = result !== null;
+              output.push(elemOut);
+            })
+            .finally(() => {
+              if (output.length === localResults.length) {
+                ful(output);
+              }
+            });
         });
     });
   });

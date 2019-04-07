@@ -1,9 +1,9 @@
-const {
-  Op,
-} = require('sequelize');
 const db = require('../models');
+const {
+  isFavourite
+} = require('../helpers/isFavourite');
 
-function combineWithLocalInfo(yelpResults) {
+function combineWithLocalInfo(yelpResults, user_id = 1) {
   return new Promise((ful, rej) => {
     const output = [];
 
@@ -18,15 +18,21 @@ function combineWithLocalInfo(yelpResults) {
           }
         })
         .then((localElem) => {
-          output.push({
+          const elemOut = {
             ...yelpElem,
             ...localElem[0].dataValues,
-            is_favourite: true,
-          });
+          };
 
-          if (output.length === yelpResults.data.businesses.length) {
-            ful(output);
-          }
+          isFavourite(user_id, localElem[0].id)
+            .then((result) => {
+              elemOut.is_favourite = result !== null;
+              output.push(elemOut);
+            })
+            .finally(() => {
+              if (output.length === yelpResults.data.businesses.length) {
+                ful(output);
+              }
+            });
         });
     });
   });
@@ -45,11 +51,17 @@ function combineOneWithLocalInfo(yelpElem) {
         }
       })
       .then((localElem) => {
-        ful({
+        const output = {
           ...yelpElem.data,
           ...localElem[0].dataValues,
-          is_favourite: true,
-        });
+        };
+        isFavourite(1, localElem[0].id)
+          .then((result) => {
+            output.is_favourite = result !== null;
+          })
+          .finally(() => {
+            ful(output);
+          });
       });
   });
 }

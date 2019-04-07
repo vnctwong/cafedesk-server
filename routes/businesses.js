@@ -2,7 +2,7 @@ const express = require('express');
 const yelp = require('../api/yelp');
 const db = require('../models');
 const {
-  combineOneWithLocalInfo
+  combineOneWithLocalInfo,
 } = require('../helpers/combineWithLocal');
 
 const router = express.Router();
@@ -11,9 +11,12 @@ module.exports = () => {
   router.get('/', (req, res) => {
     db.Business.findAll({
         // filter businesses THROUGH.WHERE join table
-        where: {
-
-        },
+        include: [{
+          model: db.User_fav_business,
+          where: {
+            is_favourite: true,
+          },
+        }],
       })
       // if (column), dfn new k:v
       // send new result
@@ -21,6 +24,7 @@ module.exports = () => {
         res.status(200).send(businesses);
       });
   });
+
   router.post('/', (req, res) => {
     db.Business
       .create({

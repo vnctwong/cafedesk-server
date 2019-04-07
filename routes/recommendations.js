@@ -1,32 +1,35 @@
 const express = require('express');
 const {
-  Op
+  Op,
 } = require('Sequelize');
 const db = require('../models');
 const {
-  combineWithRemoteInfo
+  combineWithRemoteInfo,
 } = require('../helpers/combineWithRemote');
 
 const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    // given a req array
-    const reqArray = ['tagName1', 'tagName2', 'tagName3'];
     // loop through db
     db.Tag.findAll({
         where: {
           name: {
             // find all matching tags
-            [Op.or]: reqArray,
+            [Op.or]: req.params.tags || ['quiet'],
           },
         },
       })
+      .then((result) => {
+        if (result.length === 0) {
+          return Promise.reject('No results found');
+        }
+
+        return result;
+      })
       // create mapArray of associated BusinessId
       .map(tag => tag.get('BusinessId'))
-      .reduce((unique, item) => {
-        return unique.includes(item) ? unique : [...unique, item];
-      }, [])
+      .reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
       .then((businessIdArray) => {
         db.Business.findAll({
             where: {
@@ -35,12 +38,16 @@ module.exports = () => {
               },
             },
           })
-          .then((businessResults) => {
-            return combineWithRemoteInfo(businessResults);
-          })
+          .then((businessResults) => combineWithRemoteInfo(businessResults))
           .then((combinedResults) => {
             res.send(combinedResults);
+          })
+          .catch((error) => {
+            res.status(500).send(error);
           });
+      })
+      .catch((error) => {
+        res.status(500).send(error);
       });
   });
 
