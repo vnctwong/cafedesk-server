@@ -18,15 +18,21 @@ function combineWithLocalInfo(yelpResults) {
           }
         })
         .then((localElem) => {
-          output.push({
+          const elemOut = {
             ...yelpElem,
             ...localElem[0].dataValues,
-            is_favourite: true,
-          });
+          };
 
-          if (output.length === yelpResults.data.businesses.length) {
-            ful(output);
-          }
+          isFavourite(1, localElem[0].id)
+            .then((result) => {
+              elemOut.is_favourite = result !== null;
+              output.push(elemOut);
+            })
+            .finally(() => {
+              if (output.length === yelpResults.data.businesses.length) {
+                ful(output);
+              }
+            });
         });
     });
   });
@@ -45,12 +51,29 @@ function combineOneWithLocalInfo(yelpElem) {
         }
       })
       .then((localElem) => {
-        ful({
+        const output = {
           ...yelpElem.data,
           ...localElem[0].dataValues,
-          is_favourite: true,
-        });
+        };
+        isFavourite(1, localElem[0].id)
+          .then((result) => {
+            output.is_favourite = result !== null;
+          })
+          .finally(() => {
+            ful(output);
+          });
       });
+  });
+}
+
+function isFavourite(user_id, business_id) {
+  return db.User_fav_business.findOne({
+    where: {
+      [Op.and]: {
+        UserId: user_id,
+        BusinessId: business_id,
+      },
+    },
   });
 }
 
