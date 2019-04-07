@@ -1,7 +1,7 @@
 const express = require('express');
 const {
   Op,
-} = require('Sequelize');
+} = require('sequelize');
 const db = require('../models');
 const {
   combineWithRemoteInfo,
