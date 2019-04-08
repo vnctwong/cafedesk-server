@@ -12,10 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      rated: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

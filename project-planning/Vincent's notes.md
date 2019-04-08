@@ -59,3 +59,5 @@
     * search coffee, 20 new entry & !search cat
 # Filter business by favorite
 
+# custom fnc, how to know which params optional
+

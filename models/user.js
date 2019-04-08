@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = ({
     Business,
   }) => {
-    // associations can be defined here
+
     User.belongsToMany(Business, {
       through: 'User_fav_business',
       as: 'Favs',
