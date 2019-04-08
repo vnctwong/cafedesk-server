@@ -42,10 +42,8 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-
     return queryInterface.bulkDelete('Tags', null, {});
-
-  }
+  },
 };
 
 // EMPTY FIELD INSERT STILL WORKS, JUST RETURNS NULL
