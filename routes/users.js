@@ -55,7 +55,6 @@ module.exports = () => {
       UserId: req.params.user_id,
       // need to hardcode businessId for now      
       BusinessId: 1,
-      is_favourite: true,
     });
     // need to hardcode businessId for now
     res.send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
