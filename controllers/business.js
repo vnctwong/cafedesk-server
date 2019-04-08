@@ -1,7 +1,7 @@
 const Business = require('../models').Business;
 const {
   Op
-} = require('Sequelize');
+} = require('sequelize');
 
 module.exports = {
   create(business) {

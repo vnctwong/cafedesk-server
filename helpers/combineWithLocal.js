@@ -1,7 +1,10 @@
 const db = require('../models');
 const {
-  isFavourite
+  isFavourite,
 } = require('../helpers/isFavourite');
+const {
+  getTags,
+} = require('../helpers/getTags');
 
 function combineWithLocalInfo(yelpResults, user_id = 1) {
   return new Promise((ful, rej) => {
@@ -26,9 +29,13 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
           isFavourite(user_id, localElem[0].id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
-              output.push(elemOut);
+            });
+          getTags(localElem[0].id)
+            .then((result) => {
+              elemOut.tags = result;
             })
             .finally(() => {
+              output.push(elemOut);
               if (output.length === yelpResults.data.businesses.length) {
                 ful(output);
               }
@@ -38,7 +45,7 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
   });
 }
 
-function combineOneWithLocalInfo(yelpElem) {
+function combineOneWithLocalInfo(yelpElem, user_id = 1) {
   return new Promise((ful, rej) => {
 
     db.Business.findOrCreate({
@@ -55,9 +62,13 @@ function combineOneWithLocalInfo(yelpElem) {
           ...yelpElem.data,
           ...localElem[0].dataValues,
         };
-        isFavourite(1, localElem[0].id)
+        isFavourite(user_id, localElem[0].id)
           .then((result) => {
             output.is_favourite = result !== null;
+          });
+        getTags(localElem[0].id)
+          .then((result) => {
+            output.tags = result;
           })
           .finally(() => {
             ful(output);
