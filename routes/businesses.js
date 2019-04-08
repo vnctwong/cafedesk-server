@@ -40,16 +40,17 @@ module.exports = () => {
       });
   });
 
-  router.get('/:yelp_id', (req, res) => {
-    yelp.getBusiness(req.params.yelp_id)
-      .then((yelpResult) => {
-        return combineOneWithLocalInfo(yelpResult);
-      })
-      .then((specificBusiness) => {
-        res.status(200).send(specificBusiness);
-      })
-      .catch((error) => {
-        res.status(500).send(error);
+  router.get('/:id', (req, res) => {
+    db.Business.findByPk(req.params.id)
+      .then((result) => {
+        yelp.getBusiness(result.yelp_id)
+          .then(yelpResult => combineOneWithLocalInfo(yelpResult))
+          .then((specificBusiness) => {
+            res.status(200).send(specificBusiness);
+          })
+          .catch((error) => {
+            res.status(500).send(error);
+          });
       });
   });
 

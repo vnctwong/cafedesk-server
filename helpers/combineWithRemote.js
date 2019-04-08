@@ -7,10 +7,11 @@ const {
 } = require('../helpers/getTags');
 
 function combineWithRemoteInfo(localResults, user_id = 1) {
-  return new Promise((ful, rej) => {
-    const output = [];
+  const limitLocalResults = localResults.slice(0, 8);
+  const output = [];
 
-    localResults.map((localElem) => {
+  return new Promise((ful, rej) => {
+    limitLocalResults.map((localElem) => {
       yelp.getBusiness(localElem.yelp_id)
         .then((yelpElem) => {
           const elemOut = {
@@ -28,10 +29,15 @@ function combineWithRemoteInfo(localResults, user_id = 1) {
             })
             .finally(() => {
               output.push(elemOut);
-              if (output.length === localResults.length) {
+              if (output.length === limitLocalResults.length) {
                 ful(output);
               }
             });
+        })
+        .catch(error => {
+          console.log();
+
+          rej(error);
         });
     });
   });

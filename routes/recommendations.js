@@ -11,12 +11,13 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
+    const tags = ['outlets', 'quiet'];
     // loop through db
     db.Tag.findAll({
         where: {
           name: {
             // find all matching tags
-            [Op.or]: req.params.tags || ['quiet'],
+            [Op.or]: tags,
           },
         },
       })
@@ -29,7 +30,7 @@ module.exports = () => {
       })
       // create mapArray of associated BusinessId
       .map(tag => tag.get('BusinessId'))
-      .reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
+      .reduce((unique, item) => (unique.includes(item) ? unique : [...unique, item]), [])
       .then((businessIdArray) => {
         db.Business.findAll({
             where: {
@@ -38,7 +39,7 @@ module.exports = () => {
               },
             },
           })
-          .then((businessResults) => combineWithRemoteInfo(businessResults))
+          .then(businessResults => combineWithRemoteInfo(businessResults))
           .then((combinedResults) => {
             res.send(combinedResults);
           })
