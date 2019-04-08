@@ -18,7 +18,19 @@ module.exports = {
       name: 'User3',
       createdAt: new Date(),
       updatedAt: new Date(),
-    }], )
+    }, {
+      name: 'User4',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'User5',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'User6',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }]);
   },
 
   down: (queryInterface, Sequelize) => {

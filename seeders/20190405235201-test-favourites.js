@@ -20,6 +20,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        UserId: 1,
+        BusinessId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        UserId: 1,
+        BusinessId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        UserId: 1,
+        BusinessId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
