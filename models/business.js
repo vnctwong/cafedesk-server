@@ -1,7 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Business = sequelize.define('Business', {
     name: DataTypes.STRING,
-    img_url: DataTypes.STRING(1234),
     yelp_id: DataTypes.STRING,
   }, {});
 
