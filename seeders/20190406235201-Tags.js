@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Tags', [{
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 1,
         BusinessId: 1,
         createdAt: new Date(),
@@ -31,7 +31,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 2,
         BusinessId: 1,
         createdAt: new Date(),
@@ -122,7 +122,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 2,
         BusinessId: 4,
         createdAt: new Date(),
@@ -283,7 +283,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 2,
         BusinessId: 9,
         createdAt: new Date(),
@@ -388,7 +388,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 6,
         BusinessId: 12,
         createdAt: new Date(),
@@ -535,7 +535,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 6,
         BusinessId: 16,
         createdAt: new Date(),
@@ -976,7 +976,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 5,
         BusinessId: 8,
         createdAt: new Date(),
@@ -1144,7 +1144,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 4,
         BusinessId: 13,
         createdAt: new Date(),
@@ -1291,7 +1291,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Bakery',
+        name: 'Baked Goods',
         UserId: 6,
         BusinessId: 17,
         createdAt: new Date(),
