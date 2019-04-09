@@ -1,8 +1,8 @@
 const express = require('express');
+const db = require('../models');
 
 const router = express.Router();
 
-const db = require('../models');
 
 module.exports = () => {
   router.get('/', (req, res) => {
@@ -10,7 +10,7 @@ module.exports = () => {
       .map(tag => tag.get('name'))
       .reduce((unique, elem) => (unique.includes(elem) ? unique : [...unique, elem]), [])
       .then((uniqueNameArray) => {
-        res.send(uniqueNameArray);
+        res.status(200).send(uniqueNameArray);
       });
   });
 

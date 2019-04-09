@@ -67,3 +67,8 @@
 - history hardcoded
 - 
 
+# order tags by count
+- where to call count for tags
+- how to call count for tags
+ 
+
