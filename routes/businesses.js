@@ -10,7 +10,6 @@ const router = express.Router();
 module.exports = () => {
   router.get('/', (req, res) => {
     db.Business.findAll({
-        // filter businesses THROUGH.WHERE join table
         include: [{
           model: db.User_fav_business,
           where: {
@@ -18,8 +17,6 @@ module.exports = () => {
           },
         }],
       })
-      // if (column), dfn new k:v
-      // send new result
       .then((businesses) => {
         res.status(200).send(businesses);
       });
