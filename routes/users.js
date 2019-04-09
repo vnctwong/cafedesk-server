@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../models');
 const {
-  combineWithRemoteInfo
+  combineWithRemoteInfo,
 } = require('../helpers/combineWithRemote');
 
 const router = express.Router();
@@ -10,14 +10,14 @@ module.exports = () => {
   router.get('/', (req, res) => {
     db.User.findAll()
       .then((result) => {
-        res.send(result);
+        res.status(200).send(result);
       });
   });
   router.post('/', (req, res) => {
     db.User.create({
-      name: 'just test name',
+      name: req.params.name || 'Test User',
     });
-    res.send('Created user');
+    res.status(200).send('Created user');
   });
 
   router.get('/:user_id', (req, res) => {
@@ -27,7 +27,7 @@ module.exports = () => {
       // get a search result/obj
       .then((result) => {
         // res.send(result)
-        res.send(result);
+        res.status(200).send(result);
       });
   });
 
@@ -53,11 +53,9 @@ module.exports = () => {
     // * create row in user_fav for user_id and business_id
     db.User_fav_business.create({
       UserId: req.params.user_id,
-      // need to hardcode businessId for now      
-      BusinessId: 1,
+      BusinessId: req.params.business_id || 1,
     });
-    // need to hardcode businessId for now
-    res.send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
+    res.status(200).send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
   });
 
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
@@ -69,7 +67,7 @@ module.exports = () => {
       })
       .then(() => {
         // send message ${req.params.user_id} deleted a favorite
-        res.send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
+        res.status(200).send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
       });
   });
 
@@ -84,7 +82,7 @@ module.exports = () => {
 
     }).then(() => {
       // send res saying created
-      res.send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
+      res.status(200).send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
     });
   });
   router.get('/:user_id/views', (req, res) => {
@@ -118,7 +116,7 @@ module.exports = () => {
         },
       })
       .then(() => {
-        res.send(`User ${req.params.user_id} viewed id ${req.params.viewed_id}`);
+        res.status(200).send(`User ${req.params.user_id} viewed id ${req.params.viewed_id}`);
       });
   });
 
@@ -132,7 +130,7 @@ module.exports = () => {
       BusinessId: 1,
     });
     // need to hardcode businessId for now
-    res.send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
+    res.status(200).send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
   });
 
   router.get('/:user_id/tags', (req, res) => {
@@ -147,7 +145,7 @@ module.exports = () => {
             return combineWithRemoteInfo(tags);
           })
           .then((combinedTags) => {
-            res.send(combinedTags);
+            res.status(200).send(combinedTags);
           });
       });
   });
