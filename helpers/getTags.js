@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const db = require('../models');
 
 function getTags(business_id) {
@@ -14,7 +15,7 @@ function getTags(business_id) {
       return results;
     })
     .map(tag => tag.get('name'))
-    .reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], []);
+    .reduce((unique, item) => (unique.includes(item) ? unique : [...unique, item]), []);
 }
 
 module.exports = {

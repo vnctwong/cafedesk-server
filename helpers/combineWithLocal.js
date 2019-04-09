@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const db = require('../models');
 const {
   isFavourite,
@@ -9,7 +10,7 @@ const {
 function combineWithLocalInfo(yelpResults, user_id = 1) {
   const output = [];
 
-  return new Promise((ful, rej) => {
+  return new Promise((ful) => {
     // map over all results from yelp
     yelpResults.data.businesses.map((yelpElem) => {
       db.Business.findOrCreate({
@@ -19,7 +20,7 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
           defaults: {
             yelp_id: yelpElem.id,
             name: yelpElem.name,
-          }
+          },
         })
         .then((localElem) => {
           const elemOut = {
@@ -48,7 +49,7 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
 }
 
 function combineOneWithLocalInfo(yelpElem, user_id = 1) {
-  return new Promise((ful, rej) => {
+  return new Promise((ful) => {
     db.Business.findOrCreate({
         where: {
           yelp_id: yelpElem.data.id,
@@ -56,7 +57,7 @@ function combineOneWithLocalInfo(yelpElem, user_id = 1) {
         defaults: {
           yelp_id: yelpElem.data.id,
           name: yelpElem.data.name,
-        }
+        },
       })
       .then((localElem) => {
         const output = {
