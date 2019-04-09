@@ -35,7 +35,8 @@ function combineWithRemoteInfo(localResults, user_id = 1) {
             });
         })
         .catch(error => {
-          console.log();
+          console.log('************');
+          console.log(error);
 
           rej(error);
         });

@@ -19,12 +19,12 @@ module.exports = {
       updatedAt: new Date(),
     }, {
       name: '49th Parallel Coffee',
-      yelp_id: '-d473gtB7sazHlWu_1a2CA',
+      yelp_id: 'd473gtB7sazHlWu_1a2CA',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
       name: 'Honolulu Coffee',
-      yelp_id: '-OjVRMDAvq93MOmPCd23uCA',
+      yelp_id: 'OjVRMDAvq93MOmPCd23uCA',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
