@@ -73,7 +73,7 @@ module.exports = () => {
             return combineWithRemoteInfo(views);
           })
           .then((combinedViews) => {
-            res.send(combinedViews);
+            res.status(200).send(combinedViews);
           });
       });
   });
