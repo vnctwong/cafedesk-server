@@ -61,3 +61,9 @@
 
 # custom fnc, how to know which params optional
 
+# Elements not rendering properly
+- clicking details reloads before going to actual details
+- favorites hardcoded
+- history hardcoded
+- 
+
