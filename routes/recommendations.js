@@ -11,7 +11,7 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    const tags = ['outlets', 'quiet'];
+    const tags = ['Has lots of outlets', 'Quiet'];
     // loop through db
     db.Tag.findAll({
         where: {
