@@ -52,6 +52,56 @@ module.exports = {
       yelp_id: '7frP_EAuworLHTVB-SDQrw',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }, {
+      name: 'Rocanini Coffee Roasters',
+      yelp_id: 'KF9osr-B-5jzmujeb5lMkA',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'Incognito Coffee',
+      yelp_id: '3ByjrLF8nyArUxvO6vqJCw',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'JJ Bean Coffee Roasters',
+      yelp_id: 'rF6jLBYZaBmdRj-ubUGVgQ',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'Elysian Coffee',
+      yelp_id: 'dplKdpONowTjlPZvq0wSRw',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'PappaRoti',
+      yelp_id: 'CcNjx7Y8fWhuApJa2cY56w',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'Breka Bakery & Cafe',
+      yelp_id: 'gX0vuxzCD2aFBEeRUFJWpg',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'Black Echo Coffee',
+      yelp_id: '6we9hSReCQ0urWSMoHDfpA',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: "Mario's Coffee Express",
+      yelp_id: '2SRaxLylJlnOANhmPQ1Eyg',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: '7 Days Coffee',
+      yelp_id: 'zIW_FODceS5-f7RmTWLIIw',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      name: 'Coo Coo Coffee',
+      yelp_id: 'dF5qYrLOxp710HOSWhIZ9g',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }]);
   },
 
