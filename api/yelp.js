@@ -12,15 +12,27 @@ function search(query, longitude = -123.1207, latitude = 49.2827) {
   });
 }
 
-function getBusiness(query) {
-  return axios.get(`https://api.yelp.com/v3/businesses/${query}`, {
+function getBusiness(yelp_id) {
+  return axios.get(`https://api.yelp.com/v3/businesses/${yelp_id}`, {
     headers: {
       Authorization: auth,
     },
   });
 }
 
+function getBusinessDetailed(yelp_id, business_id, user_id = 1) {
+  return getBusiness(yelp_id)
+    .finally(() => {
+      axios.post(`http://localhost:8080/users/${user_id}/views`, {
+        headers: {
+          business_id,
+        },
+      });
+    });
+}
+
 module.exports = {
   search,
   getBusiness,
+  getBusinessDetailed,
 };

@@ -43,14 +43,19 @@ module.exports = () => {
   router.get('/:id', (req, res) => {
     db.Business.findByPk(req.params.id)
       .then((result) => {
-        yelp.getBusiness(result.yelp_id)
+        yelp.getBusinessDetailed(result.yelp_id, result.id, req.params.user_id)
           .then(yelpResult => combineOneWithLocalInfo(yelpResult))
           .then((specificBusiness) => {
             res.status(200).send(specificBusiness);
           })
           .catch((error) => {
+            console.error(error);
             res.status(500).send(error);
           });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send(error);
       });
   });
 

@@ -11,7 +11,7 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    const tags = ['outlets', 'quiet'];
+    const tags = ['Quiet', 'Outlets', 'Relaxing Music', 'Good For Groups', 'Close To Skytrain', 'Cheap', 'Lively', 'Comfortable Chairs', 'Food', 'Friendly', 'Baked Goods', 'Not Busy', 'Air-Conditioning', 'Well Lit', 'Laptop Friendly', 'Free Wifi'];
     // loop through db
     db.Tag.findAll({
         where: {

@@ -7,7 +7,7 @@ const {
 } = require('../helpers/getTags');
 
 function combineWithRemoteInfo(localResults, user_id = 1) {
-  const limitLocalResults = localResults.slice(0, 8);
+  const limitLocalResults = localResults.slice(0, 6);
   const output = [];
 
   return new Promise((ful, rej) => {
@@ -35,8 +35,7 @@ function combineWithRemoteInfo(localResults, user_id = 1) {
             });
         })
         .catch(error => {
-          console.log();
-
+          console.error(error);
           rej(error);
         });
     });

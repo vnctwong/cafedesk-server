@@ -24,7 +24,7 @@ module.exports = {
       updatedAt: new Date(),
     }, {
       name: 'Honolulu Coffee',
-      yelp_id: '-OjVRMDAvq93MOmPCd23uCA',
+      yelp_id: 'OjVRMDAvq93MOmPCd23uCA',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {

@@ -80,7 +80,7 @@ module.exports = () => {
       viewed: true,
       UserId: req.params.user_id,
       // route not set to handle businessId atm
-      BusinessId: 1,
+      BusinessId: req.params.business_id || 1,
 
     }).then(() => {
       // send res saying created
