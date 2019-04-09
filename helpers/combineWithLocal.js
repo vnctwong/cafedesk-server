@@ -7,9 +7,10 @@ const {
 } = require('../helpers/getTags');
 
 function combineWithLocalInfo(yelpResults, user_id = 1) {
-  return new Promise((ful, rej) => {
-    const output = [];
+  const output = [];
 
+  return new Promise((ful, rej) => {
+    // map over all results from yelp
     yelpResults.data.businesses.map((yelpElem) => {
       db.Business.findOrCreate({
           where: {
@@ -26,6 +27,7 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
             ...localElem[0].dataValues,
           };
 
+          // add is_favourite and tags before adding to new list
           isFavourite(user_id, localElem[0].id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
@@ -47,7 +49,6 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
 
 function combineOneWithLocalInfo(yelpElem, user_id = 1) {
   return new Promise((ful, rej) => {
-
     db.Business.findOrCreate({
         where: {
           yelp_id: yelpElem.data.id,
