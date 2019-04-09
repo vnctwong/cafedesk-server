@@ -21,19 +21,13 @@ module.exports = () => {
   });
 
   router.get('/:user_id', (req, res) => {
-    // * pull row in db where id = ${req.params.user_id}
-    // model(search by id)
     db.User.findByPk(req.params.user_id)
-      // get a search result/obj
       .then((result) => {
-        // res.send(result)
         res.status(200).send(result);
       });
   });
 
   router.get('/:user_id/favourites', (req, res) => {
-    // * find all favs for user id
-    // look favs table, return User_fav_business where userId = req.params.user_id
     db.User.findOne({
         where: {
           id: req.params.user_id,
@@ -50,54 +44,30 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/favourites/', (req, res) => {
-    // * create row in user_fav for user_id and business_id
     db.User_fav_business.create({
       UserId: req.params.user_id,
       BusinessId: req.params.business_id || 1,
     });
     res.status(200).send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
   });
-
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
-    // on req, delete /:user_id/favourites/:${req.params.favourite_id}
     db.User_fav_business.destroy({
         where: {
           id: req.params.favourite_id,
         },
       })
       .then(() => {
-        // send message ${req.params.user_id} deleted a favorite
         res.status(200).send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
       });
   });
 
-  router.post('/:user_id/views', (req, res) => {
-    // when req recieve, create row in user_view_business with userId and businessId
-    db.User_viewed_business.create({
-
-      viewed: true,
-      UserId: req.params.user_id,
-      // route not set to handle businessId atm
-      BusinessId: req.params.business_id || 1,
-
-    }).then(() => {
-      // send res saying created
-      res.status(200).send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
-    });
-  });
   router.get('/:user_id/views', (req, res) => {
-    // *on req, res.send businesses by businessId where UserId = params.user_id
-    // make query on user_viewed_business
     db.User.findOne({
         where: {
-          // *select rows where UserId = req.params.user_id
           id: req.params.user_id,
         },
-        // chained methods have shared scope
       })
       .then((findOneReturns) => {
-        // console.log('what is findAll returning', findOneReturns);
-        // filter result (a promise obj) for businessId (need association)
         findOneReturns.getViews()
           .then((views) => {
             return combineWithRemoteInfo(views);
@@ -106,6 +76,17 @@ module.exports = () => {
             res.send(combinedViews);
           });
       });
+  });
+  router.post('/:user_id/views', (req, res) => {
+    db.User_viewed_business.create({
+
+      viewed: true,
+      UserId: req.params.user_id,
+      BusinessId: req.params.business_id || 1,
+
+    }).then(() => {
+      res.status(200).send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
+    });
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
     db.User_viewed_business.update({
@@ -118,19 +99,6 @@ module.exports = () => {
       .then(() => {
         res.status(200).send(`User ${req.params.user_id} viewed id ${req.params.viewed_id}`);
       });
-  });
-
-  router.post('/:user_id/tags/', (req, res) => {
-
-    db.Tag.create({
-      name: 'test tag name',
-      rated: true,
-      UserId: req.params.user_id,
-      // need to hardcode businessId for now
-      BusinessId: 1,
-    });
-    // need to hardcode businessId for now
-    res.status(200).send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
   });
 
   router.get('/:user_id/tags', (req, res) => {
@@ -148,6 +116,16 @@ module.exports = () => {
             res.status(200).send(combinedTags);
           });
       });
+  });
+  router.post('/:user_id/tags/', (req, res) => {
+
+    db.Tag.create({
+      name: 'test tag name',
+      rated: true,
+      UserId: req.params.user_id,
+      BusinessId: 1,
+    });
+    res.status(200).send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
   });
 
   return router;

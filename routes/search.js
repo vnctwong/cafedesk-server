@@ -1,13 +1,12 @@
 const express = require('express');
 const yelp = require('../api/yelp');
 const {
-  combineWithLocalInfo
+  combineWithLocalInfo,
 } = require('../helpers/combineWithLocal');
 
 const router = express.Router();
 
 module.exports = () => {
-  // search route
   router.get('/:keyword', (req, res) => {
     yelp.search(req.params.keyword)
       .then((yelpResults) => {
