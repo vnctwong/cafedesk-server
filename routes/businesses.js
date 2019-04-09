@@ -9,14 +9,7 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', (req, res) => {
-    db.Business.findAll({
-        include: [{
-          model: db.User_fav_business,
-          where: {
-            is_favourite: true,
-          },
-        }],
-      })
+    db.Business.findAll()
       .then((businesses) => {
         res.status(200).send(businesses);
       });
