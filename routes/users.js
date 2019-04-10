@@ -123,7 +123,7 @@ module.exports = () => {
       name: 'test tag name',
       rated: true,
       UserId: req.params.user_id,
-      BusinessId: 1,
+      BusinessId: req.params.business_id || 1,
     });
     res.status(200).send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
   });
