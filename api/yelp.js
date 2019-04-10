@@ -24,7 +24,7 @@ function getBusinessDetailed(yelp_id, business_id, user_id = 1) {
   return getBusiness(yelp_id)
     .finally(() => {
       axios.post(`https://cafedesk-server.herokuapp.com/users/${user_id}/views`, {
-        headers: {
+        params: {
           business_id,
         },
       });
