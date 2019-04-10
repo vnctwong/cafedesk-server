@@ -66,6 +66,10 @@ function combineOneWithLocalInfo(yelpElem, user_id = 1) {
           .then((result) => {
             output.is_favourite = result !== null;
           });
+
+
+
+
         getTags(localElem[0].id)
           .then((result) => {
             output.tags = result;
