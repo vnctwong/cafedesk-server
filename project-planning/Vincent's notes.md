@@ -47,17 +47,6 @@
   - else update updateAt = sequelize.DATE
   - is viewed needed?
   - ? why was get accessor not a function when qrying wrong table/id
-## business
-  - search coffee, inserts DB (search by cat)
-  - search juice, inserts DB (!search cat but shows cat)
-  - search by coffee, new inserts DB (!search cat, !show cat)
-  - search bakery, show DB name but !cat
-  - search coffee, show DB, but only last search
-    * search coffee, inserts DB (search by cat)
-    * search bake, show DB, but !cat
-    * search bakery, same
-    * search coffee, 20 new entry & !search cat
-# Filter business by favorite
 
 # custom fnc, how to know which params optional
 
@@ -70,5 +59,19 @@
 # order tags by count
 - where to call count for tags
 - how to call count for tags
+
+# deployment fixes (netlify branch)
+- 'business list loading...' load when tag select
+- navbar on top of chrome browser
+- 'go back' load when business details
+- landscape mode static scroll
+- nav bar tabs don't stay highlighted
+- cursor changes from finger to text on business detail
+- business detail page, open not open now
+- need two fingers to scroll business detail map
+- how to favorite
+- 
+
+
  
 
