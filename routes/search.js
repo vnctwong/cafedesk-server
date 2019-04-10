@@ -8,8 +8,10 @@ const router = express.Router();
 
 module.exports = () => {
   // returns results of standard yelp search with additional data from local DB
-  router.get('/:keyword', (req, res) => {
-    yelp.search(req.params.keyword, req.params.longitude, req.params.latitude)
+  router.get('/', (req, res) => {
+    console.log(req.query);
+
+    yelp.search(req.query.keyword, req.query.longitude, req.query.latitude)
       .then(yelpResults => combineWithLocalInfo(yelpResults))
       .then((combinedResults) => {
         res.status(200).send(combinedResults);
