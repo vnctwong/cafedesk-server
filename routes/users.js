@@ -64,7 +64,7 @@ module.exports = () => {
     db.User.findByPk(req.params.user_id)
       .then((findOneReturns) => {
         findOneReturns.getViews()
-          .then(views => combineWithRemoteInfo(views))
+          .then(views => (views.length > 0 ? combineWithRemoteInfo(views) : 'No results found'))
           .then((combinedViews) => {
             res.status(200).send(combinedViews);
           })
