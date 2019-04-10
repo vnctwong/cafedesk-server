@@ -66,7 +66,7 @@ module.exports = () => {
         findOneReturns.getViews()
           .then(views => combineWithRemoteInfo(views))
           .then((combinedViews) => {
-            res.status(200).send(combinedViews);
+            res.status(200).send(combinedViews.slice(0, 10));
           });
       });
   });
@@ -76,20 +76,8 @@ module.exports = () => {
       UserId: req.params.user_id,
       BusinessId: req.query.business_id || 1,
     }).then(() => {
-      res.status(200).send(`User ${req.query.user_id} viewed business ${req.query.business_id}`);
+      res.status(200).send(`User ${req.params.user_id} viewed business ${req.query.business_id}`);
     });
-  });
-  router.post('/:user_id/views/:view_id', (req, res) => {
-    db.User_viewed_business.update({
-        viewed: true,
-      }, {
-        where: {
-          id: req.query.view_id,
-        },
-      })
-      .then(() => {
-        res.status(200).send(`User ${req.query.user_id} viewed id ${req.query.viewed_id}`);
-      });
   });
 
   // get/create/update user's tags

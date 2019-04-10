@@ -11,14 +11,13 @@ module.exports = () => {
   // returns list of businesses that match user's preferences
   router.get('/', (req, res) => {
     const tags = req.query.tags || ['Quiet', 'Outlets', 'Friendly'];
-
     yelp.search('cafe', req.query.longitude, req.query.latitude)
       .then(results => combineWithLocalInfo(results))
       .then((combinedResults) => {
         const finalResults = [];
 
         for (const i in combinedResults) {
-          if (combinedResults[i].tags && combinedResults[i].tags.filter(element => tags.includes(element)).length !== 0) {
+          if (combinedResults[i].tags && combinedResults[i].tags.filter(element => tags.includes(element.toLowerCase())).length !== 0) {
             finalResults.push(combinedResults[i]);
           }
         }
