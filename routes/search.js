@@ -9,9 +9,7 @@ const router = express.Router();
 module.exports = () => {
   router.get('/:keyword', (req, res) => {
     yelp.search(req.params.keyword)
-      .then((yelpResults) => {
-        return combineWithLocalInfo(yelpResults);
-      })
+      .then(yelpResults => combineWithLocalInfo(yelpResults))
       .then((combinedResults) => {
         res.status(200).send(combinedResults);
       })
