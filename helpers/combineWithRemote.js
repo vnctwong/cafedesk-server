@@ -8,7 +8,7 @@ const {
 
 // combines local data with yelp's data
 function combineWithRemoteInfo(localResults, user_id = 1) {
-  const limitLocalResults = localResults.slice(0, 6);
+  const limitLocalResults = localResults.slice(-5);
   const output = [];
 
   return new Promise((ful, rej) => {
