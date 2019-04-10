@@ -7,6 +7,7 @@ const {
   getTags,
 } = require('../helpers/getTags');
 
+// combines remote (yelp) data with local data
 function combineWithLocalInfo(yelpResults, user_id = 1) {
   const output = [];
 
@@ -27,6 +28,7 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
             ...localElem[0].dataValues,
           };
 
+          // add favourite and tag info to business
           isFavourite(user_id, localElem[0].id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
@@ -62,6 +64,8 @@ function combineOneWithLocalInfo(yelpElem, user_id = 1) {
           ...yelpElem.data,
           ...localElem[0].dataValues,
         };
+
+        // add favourite and tag info to business
         isFavourite(user_id, localElem[0].id)
           .then((result) => {
             output.is_favourite = result !== null;

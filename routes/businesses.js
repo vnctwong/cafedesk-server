@@ -7,6 +7,7 @@ const {
 
 const router = express.Router();
 
+// returns list of all businesses stored in DB
 module.exports = () => {
   router.get('/', (req, res) => {
     db.Business.findAll()
@@ -15,6 +16,7 @@ module.exports = () => {
       });
   });
 
+  // create new business
   router.post('/', (req, res) => {
     db.Business
       .create({
@@ -30,6 +32,7 @@ module.exports = () => {
       });
   });
 
+  // retrieve specific business
   router.get('/:id', (req, res) => {
     db.Business.findByPk(req.params.id)
       .then((result) => {
