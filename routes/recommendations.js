@@ -18,7 +18,7 @@ module.exports = () => {
         const finalResults = [];
 
         for (const i in combinedResults) {
-          if (combinedResults[i].tags && combinedResults[i].tags.filter(element => tags.toLowerCase().includes(element)).length !== 0) {
+          if (combinedResults[i].tags && combinedResults[i].tags.filter(element => tags.includes(element)).length !== 0) {
             finalResults.push(combinedResults[i]);
           }
         }
