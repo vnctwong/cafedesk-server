@@ -20,12 +20,12 @@ module.exports = () => {
   router.post('/', (req, res) => {
     db.Business
       .create({
-        name: req.params.business.name,
-        img_url: req.params.business.image_url,
-        address: req.params.business.location.display_address.join(' '),
-        longitude: req.params.business.coordinates.longitude,
-        latitude: req.params.business.coordinates.latitude,
-        yelp_id: req.params.business.id,
+        name: req.query.business.name,
+        img_url: req.query.business.image_url,
+        address: req.query.business.location.display_address.join(' '),
+        longitude: req.query.business.coordinates.longitude,
+        latitude: req.query.business.coordinates.latitude,
+        yelp_id: req.query.business.id,
       })
       .then(() => {
         res.status(200).send('Created business');
@@ -36,7 +36,7 @@ module.exports = () => {
   router.get('/:id', (req, res) => {
     db.Business.findByPk(req.params.id)
       .then((result) => {
-        yelp.getBusinessDetailed(result.yelp_id, result.id, req.params.user_id)
+        yelp.getBusinessDetailed(result.yelp_id, result.id, req.query.user_id)
           .then(yelpResult => combineOneWithLocalInfo(yelpResult))
           .then((specificBusiness) => {
             res.status(200).send(specificBusiness);

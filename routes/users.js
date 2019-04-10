@@ -17,7 +17,7 @@ module.exports = () => {
   });
   router.post('/', (req, res) => {
     db.User.create({
-      name: req.params.name || 'Test User',
+      name: req.query.name || 'Test User',
     });
     res.status(200).send('Created user');
   });
@@ -44,18 +44,18 @@ module.exports = () => {
   router.post('/:user_id/favourites/', (req, res) => {
     db.User_fav_business.create({
       UserId: req.params.user_id,
-      BusinessId: req.params.business_id || 1,
+      BusinessId: req.query.business_id || 1,
     });
-    res.status(200).send(`User ${req.params.user_id}'s favourited business with id ${req.params.business_id}`);
+    res.status(200).send(`User ${req.params.user_id}'s favourited business with id ${req.query.business_id}`);
   });
   router.post('/:user_id/favourites/:favourite_id', (req, res) => {
     db.User_fav_business.destroy({
         where: {
-          id: req.params.favourite_id,
+          id: req.query.favourite_id,
         },
       })
       .then(() => {
-        res.status(200).send(`User ${req.params.user_id} destroyed favourite with id ${req.params.favourite_id}`);
+        res.status(200).send(`User ${req.params.user_id} destroyed favourite with id ${req.query.favourite_id}`);
       });
   });
 
@@ -74,9 +74,9 @@ module.exports = () => {
     db.User_viewed_business.create({
       viewed: true,
       UserId: req.params.user_id,
-      BusinessId: req.params.business_id || 1,
+      BusinessId: req.query.business_id || 1,
     }).then(() => {
-      res.status(200).send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
+      res.status(200).send(`User ${req.query.user_id} viewed business ${req.query.business_id}`);
     });
   });
   router.post('/:user_id/views/:view_id', (req, res) => {
@@ -84,11 +84,11 @@ module.exports = () => {
         viewed: true,
       }, {
         where: {
-          id: req.params.view_id,
+          id: req.query.view_id,
         },
       })
       .then(() => {
-        res.status(200).send(`User ${req.params.user_id} viewed id ${req.params.viewed_id}`);
+        res.status(200).send(`User ${req.query.user_id} viewed id ${req.query.viewed_id}`);
       });
   });
 
@@ -105,12 +105,12 @@ module.exports = () => {
   });
   router.post('/:user_id/tags/', (req, res) => {
     db.Tag.create({
-      name: req.params.name || 'Quiet',
+      name: req.query.name || 'Quiet',
       rated: true,
       UserId: req.params.user_id,
-      BusinessId: req.params.business_id || 1,
+      BusinessId: req.query.business_id || 1,
     });
-    res.status(200).send(`User ${req.params.user_id} created tag about business${req.params.business_id}`);
+    res.status(200).send(`User ${req.query.user_id} created tag about business${req.query.business_id}`);
   });
 
   return router;
