@@ -67,6 +67,9 @@ module.exports = () => {
           .then(views => combineWithRemoteInfo(views))
           .then((combinedViews) => {
             res.status(200).send(combinedViews);
+          })
+          .catch((error) => {
+            res.status(500).send('No results found: ', error);
           });
       });
   });
