@@ -1,4 +1,5 @@
 const axios = require('axios');
+const db = require('../models');
 require('dotenv').config();
 
 const auth = `Bearer ${process.env.YELP_KEY}`;
@@ -22,13 +23,13 @@ function getBusiness(yelp_id) {
 }
 
 // only used when user clicks business directly, marks as being viewed
-function getBusinessDetailed(yelp_id, business_id, user_id = 1) {
+function getBusinessDetailed(yelp_id, business_id = 1, user_id = 1) {
   return getBusiness(yelp_id)
     .finally(() => {
-      axios.post(`https://cafedesk-server.herokuapp.com/users/${user_id}/views`, {
-        headers: {
-          business_id,
-        },
+      db.User_viewed_business.create({
+        UserId: user_id,
+        BusinessId: business_id,
+        viewed: true,
       });
     });
 }

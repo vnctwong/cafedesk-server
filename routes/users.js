@@ -66,7 +66,7 @@ module.exports = () => {
         findOneReturns.getViews()
           .then(views => combineWithRemoteInfo(views))
           .then((combinedViews) => {
-            res.status(200).send(combinedViews.slice(0, 10));
+            res.status(200).send(combinedViews);
           });
       });
   });
