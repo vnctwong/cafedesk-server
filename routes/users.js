@@ -118,7 +118,6 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/tags/', (req, res) => {
-
     db.Tag.create({
       name: 'test tag name',
       rated: true,
