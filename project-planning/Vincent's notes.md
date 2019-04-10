@@ -60,6 +60,9 @@
 - where to call count for tags
 - how to call count for tags
 
+# mememe
+- interest in using data as a link between users / 
+
 # deployment fixes (netlify branch)
 - navbar on top of chrome browser
 - landscape mode sizing
@@ -69,25 +72,28 @@
 - need two fingers to scroll business detail map
 - how to favorite
 
+
+
 # PRESENTATIONS
 
-## Sell your product, NOT tech demo this is a sales pitch!!
-## Be ethusiatic, have reasons to be excited to dev this app
 ## 2 reasons for tech, why WE chose & why best for USER
+## Be ethusiatic, have reasons to be excited to dev this app
 ## always relate back to WHY users use product
 
-- ask user questions, set the tone, give audience reason to use   app. aka hook them in, no tech talk. RELATE
+- ask user questions, set the tone, give audience reason to use app. aka hook them in, no tech talk. RELATE
 
-- walk through user story
-  - make it very simple WHY this feature, then show HOW       while explaining
+- walk through app
+  - make it very simple WHY this feature, then show HOW while explaining
   - sprinkle tech and design choices DURING walkthrough
 
-- keep the flow, get ppl excited about a, explain a, why a &      not b. 
+- keep the flow, get ppl excited about a, explain a, why a & not b. 
   - still be excited about fails, show learning & future dev
 
 - ? how to ask Q's and engage during pitch
 
 - offer chance for questions + criticism
+
+- 8 minutes is not long! If we say everything in 6, thats even better!
 
 
  
