@@ -10,7 +10,7 @@
 CafeDesk is a webapp designed to provide users with a more focused view of the coffee shops and tea houses in Vancouver with the aim to make finding an area to study/work in as easy as possible!
 
 ## Getting Started (User)
-- Hop onto our website at https://tempory-doesnt-exist-yet.com
+- Hop onto our website at https://cafedesk.netlify.com
 
 ## Getting Started (Developer)
 - Clone the server
