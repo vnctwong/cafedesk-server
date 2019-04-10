@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const express = require('express');
 const db = require('../models');
 const {
@@ -28,16 +29,10 @@ module.exports = () => {
   });
 
   router.get('/:user_id/favourites', (req, res) => {
-    db.User.findOne({
-        where: {
-          id: req.params.user_id,
-        },
-      })
+    db.User.findByPk(req.params.user_id)
       .then((result) => {
         result.getFavs()
-          .then((favourites) => {
-            return combineWithRemoteInfo(favourites);
-          })
+          .then(favourites => combineWithRemoteInfo(favourites))
           .then((combinedFavourites) => {
             res.status(200).send(combinedFavourites);
           });
@@ -62,16 +57,10 @@ module.exports = () => {
   });
 
   router.get('/:user_id/views', (req, res) => {
-    db.User.findOne({
-        where: {
-          id: req.params.user_id,
-        },
-      })
+    db.User.findByPk(req.params.user_id)
       .then((findOneReturns) => {
         findOneReturns.getViews()
-          .then((views) => {
-            return combineWithRemoteInfo(views);
-          })
+          .then(views => combineWithRemoteInfo(views))
           .then((combinedViews) => {
             res.status(200).send(combinedViews);
           });
@@ -79,11 +68,9 @@ module.exports = () => {
   });
   router.post('/:user_id/views', (req, res) => {
     db.User_viewed_business.create({
-
       viewed: true,
       UserId: req.params.user_id,
       BusinessId: req.params.business_id || 1,
-
     }).then(() => {
       res.status(200).send(`User ${req.params.user_id} viewed business ${req.params.business_id}`);
     });
@@ -102,16 +89,10 @@ module.exports = () => {
   });
 
   router.get('/:user_id/tags', (req, res) => {
-    db.User.findOne({
-        where: {
-          id: req.params.user_id,
-        },
-      })
+    db.User.findByPk(req.params.user_id)
       .then((findOneReturns) => {
         findOneReturns.getTags()
-          .then((tags) => {
-            return combineWithRemoteInfo(tags);
-          })
+          .then(tags => combineWithRemoteInfo(tags))
           .then((combinedTags) => {
             res.status(200).send(combinedTags);
           });
@@ -119,7 +100,7 @@ module.exports = () => {
   });
   router.post('/:user_id/tags/', (req, res) => {
     db.Tag.create({
-      name: 'test tag name',
+      name: req.params.name || 'Quiet',
       rated: true,
       UserId: req.params.user_id,
       BusinessId: req.params.business_id || 1,
