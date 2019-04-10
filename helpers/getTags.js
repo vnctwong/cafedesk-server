@@ -14,8 +14,16 @@ function getTags(business_id) {
 
       return results;
     })
+    // sort tags by count and return as array
     .map(tag => tag.get('name'))
-    .reduce((unique, item) => (unique.includes(item) ? unique : [...unique, item]), []);
+    .reduce((tagObj, count) => {
+      tagObj[count] = (tagObj[count] || 0) + 1;
+      return tagObj;
+    }, {})
+    .then((tagObj) => {
+      let sortedArray = Object.keys(tagObj).sort((a, b) => tagObj[b] - tagObj[a]);
+      return sortedArray;
+    });
 }
 
 module.exports = {
