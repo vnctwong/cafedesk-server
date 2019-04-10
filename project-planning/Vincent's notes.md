@@ -61,16 +61,33 @@
 - how to call count for tags
 
 # deployment fixes (netlify branch)
-- 'business list loading...' load when tag select
 - navbar on top of chrome browser
-- 'go back' load when business details
-- landscape mode static scroll
-- nav bar tabs don't stay highlighted
+- landscape mode sizing
+- business detail loading not donut
 - cursor changes from finger to text on business detail
-- business detail page, open not open now
+- business detail page, 'open' not 'open now'
 - need two fingers to scroll business detail map
 - how to favorite
-- 
+
+# PRESENTATIONS
+
+## Sell your product, NOT tech demo this is a sales pitch!!
+## Be ethusiatic, have reasons to be excited to dev this app
+## 2 reasons for tech, why WE chose & why best for USER
+## always relate back to WHY users use product
+
+- ask user questions, set the tone, give audience reason to use   app. aka hook them in, no tech talk. RELATE
+
+- walk through user story
+  - make it very simple WHY this feature, then show HOW       while explaining
+  - sprinkle tech and design choices DURING walkthrough
+
+- keep the flow, get ppl excited about a, explain a, why a &      not b. 
+  - still be excited about fails, show learning & future dev
+
+- ? how to ask Q's and engage during pitch
+
+- offer chance for questions + criticism
 
 
  
