@@ -8,6 +8,7 @@ const yelp = require('../api/yelp');
 const router = express.Router();
 
 module.exports = () => {
+  // returns list of businesses that match user's preferences
   router.get('/', (req, res) => {
     const tags = req.params.tags || ['Quiet', 'Outlets', 'Friendly'];
 

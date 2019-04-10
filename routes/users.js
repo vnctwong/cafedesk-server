@@ -8,6 +8,7 @@ const {
 const router = express.Router();
 
 module.exports = () => {
+  // get/create users
   router.get('/', (req, res) => {
     db.User.findAll()
       .then((result) => {
@@ -21,6 +22,7 @@ module.exports = () => {
     res.status(200).send('Created user');
   });
 
+  // get specific user's details
   router.get('/:user_id', (req, res) => {
     db.User.findByPk(req.params.user_id)
       .then((result) => {
@@ -28,6 +30,7 @@ module.exports = () => {
       });
   });
 
+  // get/create/update user's favourites
   router.get('/:user_id/favourites', (req, res) => {
     db.User.findByPk(req.params.user_id)
       .then((result) => {
@@ -56,6 +59,7 @@ module.exports = () => {
       });
   });
 
+  // get/create/update user's view history
   router.get('/:user_id/views', (req, res) => {
     db.User.findByPk(req.params.user_id)
       .then((findOneReturns) => {
@@ -88,6 +92,7 @@ module.exports = () => {
       });
   });
 
+  // get/create/update user's tags
   router.get('/:user_id/tags', (req, res) => {
     db.User.findByPk(req.params.user_id)
       .then((findOneReturns) => {

@@ -12,6 +12,7 @@ function search(query, longitude = -123.1207, latitude = 49.2827) {
   });
 }
 
+// retrieve specific business's data
 function getBusiness(yelp_id) {
   return axios.get(`https://api.yelp.com/v3/businesses/${yelp_id}`, {
     headers: {
@@ -20,6 +21,7 @@ function getBusiness(yelp_id) {
   });
 }
 
+// only used when user clicks business directly, marks as being viewed
 function getBusinessDetailed(yelp_id, business_id, user_id = 1) {
   return getBusiness(yelp_id)
     .finally(() => {
