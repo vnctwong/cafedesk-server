@@ -11,7 +11,6 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
   const output = [];
 
   return new Promise((ful) => {
-    // map over all results from yelp
     yelpResults.data.businesses.map((yelpElem) => {
       db.Business.findOrCreate({
           where: {
@@ -28,7 +27,6 @@ function combineWithLocalInfo(yelpResults, user_id = 1) {
             ...localElem[0].dataValues,
           };
 
-          // add is_favourite and tags before adding to new list
           isFavourite(user_id, localElem[0].id)
             .then((result) => {
               elemOut.is_favourite = result !== null;
