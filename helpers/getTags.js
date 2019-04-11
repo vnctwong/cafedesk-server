@@ -2,11 +2,14 @@
 const db = require('../models');
 
 function getTags(business_id) {
-  return db.Tag.findAll({
+  const tags = business_id ?
+    db.Tag.findAll({
       where: {
         BusinessId: business_id,
       },
-    })
+    }) : db.Tag.findAll();
+
+  return tags
     .then((results) => {
       if (results.length === 0) {
         return Promise.reject('No results found');
