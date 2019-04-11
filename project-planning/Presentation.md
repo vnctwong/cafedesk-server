@@ -1,27 +1,43 @@
-# Introduce ourselves and app
-  - briefly, just names / stats
+# positive, team vocab
+# engage, energetic, smooth transition
+  - introduce next speaker, speaker just talks
 
-# SHORT background
-  - ? how in depth should we go? Actually sell ourselves / interests?
-  - relate who you are to a (reason for dev) || (question / idea)
+# Introduction
+- Yves says hi, passes around introductions
+- ask crowd question, engage listeners with user needs/story
 
-#  Present hypothetical Q / idea
-  - I've thought this, maybe you have as well
-  - make audience think 'I have needs and this app can solve it'
+# User Story
+- Vincent talks while demo
+- Scroll tag
+- scroll business to select
+  - see full list of tags
+  - notice map changes, zooms in for location
+- use search to compare
+  - mention tags not yelp results
+- add favorites, compare favorites, remove favorites
+- check view history, see business details
 
-# Introduce our app
-  - detail how this app solves needs, show off features
+# Front End
+ - why mobile
+ - mention responsiveness, ie momentum scroll
+ - "I like react because its easy to make good UX?"
+ - how tech choice =  better UX
 
-# Walkthrough
-  - TALK while demoing
+# Back End (vince)
+- javascript, express
+- sequelize
+  - like RoR
+  - new tech
+  - model of association, made sense for tags + api
 
-    - can chose between tech / design talking points, but keep it        simple. Do not ramble; pick topic and explain
+# Back End (yves)
+- axios + yelp api
+  - yelp api limit
+- circleCI
+- CD heroku, netlify
 
-    - if we had more time / intially we tried
-
-  - make sure each point relates to a WHY, either us or users 
-
-## Pick at least one thing, related to WHY this app/feature, to be excited in depth about
-
-# Ask for questions / suggestions
-  - be open to sourcing / collaboration
+# Closing
+- questions
+- mention some thoughts on project as a whole
+- thank listeners
+- we would love some feedback and thoughts

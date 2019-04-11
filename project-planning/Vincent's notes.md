@@ -95,6 +95,22 @@
 
 - 8 minutes is not long! If we say everything in 6, thats even better!
 
+# Feedback
+- at beginning, more personal introduction
+- more engaging, positive vocabulary 
+- smoother transition 
+- don't talk to each other
+- showcase every feature
+- facilitate bob better
+- posture, body language
+- team unity languague
+- why mobile, give reasons
+## Yves
+
+## X
+
+## Vince
+
 
  
 
