@@ -2,6 +2,9 @@
 const express = require('express');
 const db = require('../models');
 const {
+  Op,
+} = require('sequelize');
+const {
   combineWithRemoteInfo,
 } = require('../helpers/combineWithRemote');
 
@@ -42,20 +45,31 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/favourites/', (req, res) => {
-    db.User_fav_business.create({
-      UserId: req.params.user_id,
-      BusinessId: req.query.business_id || 1,
-    });
-    res.status(200).send(`User ${req.params.user_id}'s favourited business with id ${req.query.business_id}`);
-  });
-  router.post('/:user_id/favourites/:favourite_id', (req, res) => {
-    db.User_fav_business.destroy({
+    db.User_fav_business.findOrCreate({
         where: {
-          id: req.query.favourite_id,
+          [Op.and]: {
+            UserId: req.params.user_id,
+            BusinessId: req.query.business_id,
+          },
+        },
+        defaults: {
+          UserId: req.params.user_id,
+          BusinessId: req.query.business_id || 1,
         },
       })
-      .then(() => {
-        res.status(200).send(`User ${req.params.user_id} destroyed favourite with id ${req.query.favourite_id}`);
+      .then((results) => {
+        if (results[1]) {
+          res.status(200).send(results[0]);
+        } else {
+          db.User_fav_business.destroy({
+            where: {
+              [Op.and]: {
+                UserId: results[0].UserId,
+                BusinessId: results[0].BusinessId,
+              },
+            },
+          });
+        }
       });
   });
 
@@ -95,13 +109,34 @@ module.exports = () => {
       });
   });
   router.post('/:user_id/tags/', (req, res) => {
-    db.Tag.create({
-      name: req.query.name || 'Quiet',
-      rated: true,
-      UserId: req.params.user_id,
-      BusinessId: req.query.business_id || 1,
-    });
-    res.status(200).send(`User ${req.query.user_id} created tag about business${req.query.business_id}`);
+    db.Tag.findOrCreate({
+        where: {
+          [Op.and]: {
+            UserId: req.params.user_id,
+            BusinessId: req.query.business_id,
+            name: req.query.name,
+          },
+        },
+        defaults: {
+          UserId: req.params.user_id,
+          BusinessId: req.query.business_id || 1,
+          name: req.query.name,
+        },
+      })
+      .then((results) => {
+        if (results[1]) {
+          res.status(200).send(results[0]);
+        } else {
+          db.Tag.destroy({
+            where: {
+              [Op.and]: {
+                UserId: results[0].UserId,
+                BusinessId: results[0].BusinessId,
+              },
+            },
+          });
+        }
+      });
   });
 
   return router;
