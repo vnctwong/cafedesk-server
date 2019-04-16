@@ -1,10 +1,10 @@
 # CafeDesk
 
-### Main Contributors: [Vincent Wong](https://github.com/vnctwong), [Yves Desjardins](https://github.com/YvesDesjardins), [Xuenan Wang](https://github.com/xwang1000)
+### Main Contributors: [Yves Desjardins](https://github.com/YvesDesjardins), [Xuenan Wang](https://github.com/xwang1000),[Vincent Wong](https://github.com/vnctwong)
 
 ### Relevant repositories:
-- Server - https://github.com/xwang1000/cafedesk-server
-- Client -  https://github.com/xwang1000/cafedesk-client
+- Server - https://github.com/vnctwong/cafedesk-server
+- Client -  https://github.com/vnctwong/cafedesk-client
 
 ## Overview
 CafeDesk is a webapp designed to provide users with a more focused view of the coffee shops and tea houses in Vancouver with the aim to make finding an area to study/work in as easy as possible!
